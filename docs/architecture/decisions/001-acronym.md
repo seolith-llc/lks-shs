@@ -1,6 +1,6 @@
 # Decision 001 — The Framework Acronym
 
-**Status:** PROPOSED (awaiting decision) · **Date:** 2026-11-09 · **Rule:** R2 (3–5 alternatives, trade-offs, justified recommendation)
+**Status:** ACCEPTED (provisional) · **Date:** 2026-11-09 · **Rule:** R2 (3–5 alternatives, trade-offs, justified recommendation)
 
 ## Context
 
@@ -51,4 +51,16 @@ The series needs a name for the canonical 5-stage loop defined in `docs/research
 
 ## Decision
 
-_(recorded after user selection)_
+**PULSE** adopted as the working name on 2026-11-09 — per the documented recommendation, on assistant's best judgment after the selection question went unanswered. **Provisional:** the user may override at any point before Phase 4 publication; renaming costs are limited to this record and diagram labels until then. **SHS remains the project/umbrella name** (LKS-SHS); canonical phrasing: *"the PULSE loop is the heartbeat of a Self-Healing System."*
+
+Stage definitions (canonical, for all later artifacts):
+
+| Stage | Name | Contains | Verified exemplar |
+|---|---|---|---|
+| P | **Perceive** | signals: probes, heartbeats, traces, alerts, checksums | liveness probes (D02[21]); ECC/EDAC (D03[13]) |
+| U | **Understand** | anomaly interpretation, root-cause hypotheses, context assembly | Bits Investigation (D04[2]); RCACopilot (D03[50]) |
+| L | **Localize** | fault localization to component/line/config/dependency | Agentless hierarchical localization (D01[24]); AutoCodeRover AST search (D01[25]) |
+| S | **Solve** | remediate: restart / rollback / reroute / patch / scale — **always ending at the verification gate** | k8s reconciliation (D02[20]); agentic autofix + CodeQL re-run (D04[17]) |
+| E | **Evolve** | verify outcome (chaos-style steady-state check), postmortem, harden, update policy/models/runbooks | chaos principles (D02[14]); TestGen-LLM acceptance loop (D04[30]) |
+
+The **Solve→Evolve boundary is the mandatory verification gate** (axiom A6): nothing counts as healed until a non-LLM oracle (test, SAST, metric steady-state, acceptance test) says so.

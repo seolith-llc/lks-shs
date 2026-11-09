@@ -9,11 +9,11 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ `docs/research/02-pre-ai-foundations.md` — 48 verified sources, 24-row pattern catalog, gap analysis (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [x] ✓ `docs/research/03-systems-domain.md` — 51 verified sources, layered toolbox table, verified AI-era systems examples (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [x] ✓ `docs/research/04-ai-era-and-business.md` — 48 verified sources, product landscape, small-biz/enterprise playbooks, risk-to-control mapping (spot-check PASS 2026-11-09; Phase 6 full audit pending)
-- [ ] ◐ Synthesis doc unifying the taxonomy (Phase 2 input) — being written now
+- [x] ✓ Synthesis doc unifying the taxonomy — `docs/research/00-synthesis.md` (5-stage loop, 7-layer stack, builder-vs-healer, L0–L4 ladder, anchor numbers)
 
 ## Phase 2 — Synthesis (`#Step002`)
-- [ ] ☐ Acronym decision record: 3–5 candidates, trade-off table, recommendation, decision
-- [ ] ☐ Unified healing-loop taxonomy across layers (kernel → process → service → business)
+- [x] ✓ Acronym decision record: 5 candidates + trade-off matrix — **PULSE** accepted (provisional, user override open until Phase 4 publication) — `docs/architecture/decisions/001-acronym.md`
+- [x] ✓ Unified healing-loop taxonomy across layers (kernel → process → service → business) — synthesis §1–§2
 
 ## Phase 3 — Architecture & Prototypes (`#Step003`)
 - [ ] ☐ `reference-architecture.md` with stack diagram
@@ -57,3 +57,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Dossier 02 spot-check | PASS | ~250 lines: TL;DR, unifying healing-loop table (15 systems × observe/decide/act/feedback), 8 deep dives, 24-row pattern catalog, cited key numbers (243× retry math, nine-nines debunk, outage costs), 7-point gap analysis, 48-entry source list, 6 open questions; RAID paper honestly [UNVERIFIED] |
 | 2026-11-09 | Dossier 03 spot-check | PASS | 389 lines: TL;DR, 19-row layered toolbox (hardware→kernel→process→storage→AI), 6 deep dives (livepatch/Ksplice 88%, watchdogs, EDAC, eBPF, ZFS/WAL/Raft), prevention section (70% memory-safety stats, Android 76%→24%), verified pre-LLM + LLM-era AI systems (Getafix/SapFix, OSS-Fuzz AI, Big Sleep, Triangle, RCACopilot, KernelGPT, SWE-InfraBench 34%), 51 refs, folklore flagged [UNVERIFIED] |
 | 2026-11-09 | Dossier 04 spot-check | PASS | 294 lines: TL;DR, product landscape tables (AI-SRE platforms, startups, code-fixing AI) with autonomy levels + pricing, builder-vs-healer analysis, small-biz $0–50/mo playbook with 3 a.m. walkthrough, enterprise governance + L0–L4 rollout ladder, cross-source key-numbers with comparability note, 8 risks + risk-to-control mapping + negative results, 48 refs, vendor claims flagged as such |
+| 2026-11-09 | Synthesis + Decision 001 | PASS | 00-synthesis.md unifies 4 dossiers (180 sources): canonical 5-stage loop, 7-layer stack, AI builder-vs-healer, L0–L4 ladder, 15 anchor numbers, small-biz/enterprise split, naming requirements. Decision 001: 5 acronym candidates, weighted trade-off matrix, PULSE accepted provisionally (question unanswered; user override open) with canonical stage definitions |
