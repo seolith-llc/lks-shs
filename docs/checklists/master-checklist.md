@@ -5,7 +5,7 @@ Status legend: ☐ not started · ◐ in progress · ✓ done & **verified** (ev
 The competency bar: **every item below must reach ✓ with recorded evidence before Phase 7 articles are published.** Verification means an audit pass per item — links resolve, diagrams render, claims cited, code runs, videos play — logged in the Verification Log section.
 
 ## Phase 1 — Research (`#Step001`)
-- [ ] ◐ `docs/research/01-academic-foundations.md` — ≥20 verified sources, canonical refs section
+- [x] ✓ `docs/research/01-academic-foundations.md` — 33 verified sources, canonical refs, corrections documented (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [ ] ◐ `docs/research/02-pre-ai-foundations.md` — ≥20 verified sources, pattern catalog
 - [ ] ◐ `docs/research/03-systems-domain.md` — ≥20 verified sources, layered toolbox
 - [ ] ◐ `docs/research/04-ai-era-and-business.md` — ≥25 verified sources, product landscape
@@ -53,3 +53,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 |---|---|---|---|
 | 2026-11-09 | Video pipeline | PASS | `tmp/smoke/smoke.mp4` 8.99s / 103,835 B via `smoke-test.sh` |
 | 2026-11-09 | Toolchain | PASS | ffmpeg 9.0.1, python 3.14.7, node, docker present; 185 macOS voices (0 premium installed) |
+| 2026-11-09 | Dossier 01 spot-check | PASS | ~330 lines: TL;DR, timeline (1956→2026), 5 deep dives, self-* taxonomy with detect/diagnose/recover/learn, key numbers, before/after-AI table, 12 canonical + 33 full sources, 7 open questions; [UNVERIFIED] discipline observed; 3 brief corrections verified |
