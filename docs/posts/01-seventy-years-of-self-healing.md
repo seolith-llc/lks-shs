@@ -1,7 +1,7 @@
 # Part 1 · Seventy Years of Self-Healing
 
 *Series: [Overview](00-series-overview.md) · **Part 1** · [Part 2](02-the-systems-layer.md) · [Part 3](03-the-ai-era-what-actually-shipped.md) · [Part 4](04-the-pulse-framework.md)*
-**Audience:** everyone · ~8 min · Video companion: `docs/video/01-seventy-years.mp4` *(renders in Phase 5)*
+**Audience:** everyone · ~8 min · Video companion: [`docs/video/01-seventy-years.mp4`](../video/01-seventy-years.mp4) — 1:47 narrated
 
 > In 2003, Joe Armstrong wrote down the most-quoted — and most-misquoted — number in reliability engineering. The famous "nine nines" (99.9999999% availability) claimed for the Ericsson AXD301 Erlang switch turns out, **in Armstrong's own thesis**, to come from "a power-point presentation … though how these figures had been obtained was not documented." [1] That is your first lesson in this field: *healing claims are cheap; healing evidence is precious.*
 

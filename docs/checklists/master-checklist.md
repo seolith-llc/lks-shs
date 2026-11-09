@@ -32,9 +32,11 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 
 ## Phase 5 — Video (`#Step005`)
 - [x] ✓ Pipeline smoke test: `say` → ffmpeg MP4 (9.0s, 104 KB, `docs/video/scripts/smoke-test.sh`; run 2026-11-09)
-- [ ] ☐ Premium/enhanced voice install (optional upgrade; base voice fallback verified)
-- [ ] ☐ Per-post narration scripts
-- [ ] ☐ Rendered MP4s linked bidirectionally with posts
+- [x] ✓ Production pipeline `scripts/render_episode.py`: script → say narration → SVG slides → QuickLook rasterize → ffmpeg mux/crop → concat MP4 (drawtext unavailable in this ffmpeg build — SVG path chosen, decision documented in script header)
+- [x] ✓ 8 narration scripts committed (`NN-*.md`) — slides + narration separated by design
+- [x] ✓ 8 MP4s rendered (1:34–1:54 each, 1.6–2.0 MB each, 1280×720) — table in `docs/video/README.md`
+- [x] ✓ Bidirectional links: every post links its MP4 with duration; video README links companion posts
+- [ ] ☐ Premium/enhanced voice install (optional zero-code upgrade; base voice verified)
 
 ## Phase 6 — Verification & improvement loop (`#Step006`)
 - [ ] ☐ Audit pass 1 over all artifacts; defects logged and fixed; repeat until zero blocking defects
@@ -62,3 +64,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Synthesis + Decision 001 | PASS | 00-synthesis.md unifies 4 dossiers (180 sources): canonical 5-stage loop, 7-layer stack, AI builder-vs-healer, L0–L4 ladder, 15 anchor numbers, small-biz/enterprise split, naming requirements. Decision 001: 5 acronym candidates, weighted trade-off matrix, PULSE accepted provisionally (question unanswered; user override open) with canonical stage definitions |
 | 2026-11-09 | Prototype demo run | PASS | `demo.sh` → 5/5 scenarios PASS, exit 0: crash MTTR 1.6s, hang 7.9s, leak 3.2s (+ "mitigated not cured" note), errors 2.9s, crashloop → ESCALATE at MaxR=3/30s. Evidence: `prototypes/pulse-app/demo-evidence.log` |
 | 2026-11-09 | Posts link audit | PASS | Scripted check: every relative link in all 9 posts resolves to an existing file (research dossiers, architecture docs, decisions, prototype, animations). Mermaid render check deferred to Phase 6 (GitHub render) |
+| 2026-11-09 | Video render + crop check | PASS | 8/8 episodes rendered; extracted frame is 1280×720; corner pixel `0a2445` matches bg `#0B2545` (qlmanage square-letterbox crop verified); durations 94–114s; post↔video links re-audited ALL RESOLVE after wiring |
