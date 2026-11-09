@@ -1,73 +1,73 @@
 == PULSE application-track prototype ==
-run dir: /var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1
+run dir: /var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja
 
 --- scenario: crash -----------------------------------
-[10:18:58 +  0.00s] [crash] spawn service (port 8810) and wait for readiness
-[service] pid=17122 listening on 127.0.0.1:8810 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8810.json
-[10:18:59 +  0.34s] [crash] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
-[10:18:59 +  0.65s] [crash] PULSE P: alive=False exit=137 hb_age=0.61 golden=False
-[10:18:59 +  0.65s] [crash] PULSE U: classified CRASHED | PULSE L: service process (runtime layer L3)
-[10:18:59 +  0.65s] [crash] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17123 listening on 127.0.0.1:8810 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8810.json
-[10:19:00 +  1.97s] [crash] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=1634ms
-[10:19:00 +  1.98s] [crash] outcome: PASS
+[17:10:04 +  0.00s] [crash] spawn service (port 8810) and wait for readiness
+[service] pid=41868 listening on 127.0.0.1:8810 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8810.json
+[17:10:04 +  0.33s] [crash] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
+[17:10:05 +  0.64s] [crash] PULSE P: alive=False exit=137 hb_age=0.61 golden=False
+[17:10:05 +  0.64s] [crash] PULSE U: classified CRASHED | PULSE L: service process (runtime layer L3)
+[17:10:05 +  0.64s] [crash] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41869 listening on 127.0.0.1:8810 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8810.json
+[17:10:06 +  1.95s] [crash] PULSE E: verification gate → HEALED (heartbeat age 0.26s, golden=PULSE-OK) mttr=1621ms
+[17:10:06 +  1.96s] [crash] outcome: PASS
 --- scenario: hang ------------------------------------
-[10:19:00 +  0.00s] [hang] spawn service (port 8811) and wait for readiness
-[service] pid=17124 listening on 127.0.0.1:8811 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8811.json
-[10:19:01 +  0.32s] [hang] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
-[10:19:07 +  6.94s] [hang] PULSE P: alive=True exit=None hb_age=4.89 golden=False
-[10:19:07 +  6.94s] [hang] PULSE U: classified HUNG | PULSE L: event loop / heartbeat thread (runtime layer L3)
-[10:19:07 +  6.94s] [hang] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17128 listening on 127.0.0.1:8811 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8811.json
-[10:19:08 +  8.27s] [hang] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=7954ms
-[10:19:08 +  8.27s] [hang] outcome: PASS
+[17:10:06 +  0.00s] [hang] spawn service (port 8811) and wait for readiness
+[service] pid=41870 listening on 127.0.0.1:8811 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8811.json
+[17:10:06 +  0.31s] [hang] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
+[17:10:13 +  6.93s] [hang] PULSE P: alive=True exit=None hb_age=4.88 golden=False
+[17:10:13 +  6.93s] [hang] PULSE U: classified HUNG | PULSE L: event loop / heartbeat thread (runtime layer L3)
+[17:10:13 +  6.94s] [hang] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41872 listening on 127.0.0.1:8811 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8811.json
+[17:10:14 +  8.25s] [hang] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=7941ms
+[17:10:14 +  8.26s] [hang] outcome: PASS
 --- scenario: leak ------------------------------------
-[10:19:08 +  0.00s] [leak] spawn service (port 8812) and wait for readiness
-[service] pid=17132 listening on 127.0.0.1:8812 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8812.json
-[10:19:09 +  0.32s] [leak] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
-[10:19:11 +  2.19s] [leak] PULSE P: alive=True exit=None hb_age=0.11 golden=True
-[10:19:11 +  2.19s] [leak] PULSE U: classified LEAKING | PULSE L: request-handler allocation path (application logic)
-[10:19:11 +  2.20s] [leak] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17133 listening on 127.0.0.1:8812 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8812.json
-[10:19:12 +  3.52s] [leak] PULSE E: verification gate → HEALED (heartbeat age 0.26s, golden=PULSE-OK) mttr=3204ms | mitigated, not cured — restart reclaims memory; the code fix still needs an L2 human-reviewed PR ('restart is not repair', D02 gap-analysis)
-[10:19:12 +  3.53s] [leak] outcome: PASS (mitigated, not cured — restart reclaims memory; the code fix still needs an L2 human-reviewed PR ('restart is not repair', D02 gap-analysis))
+[17:10:14 +  0.00s] [leak] spawn service (port 8812) and wait for readiness
+[service] pid=41873 listening on 127.0.0.1:8812 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8812.json
+[17:10:14 +  0.32s] [leak] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
+[17:10:16 +  2.18s] [leak] PULSE P: alive=True exit=None hb_age=0.09 golden=True
+[17:10:16 +  2.18s] [leak] PULSE U: classified LEAKING | PULSE L: request-handler allocation path (application logic)
+[17:10:16 +  2.18s] [leak] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41879 listening on 127.0.0.1:8812 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8812.json
+[17:10:18 +  3.50s] [leak] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=3188ms | mitigated, not cured — restart reclaims memory; the code fix still needs an L2 human-reviewed PR ('restart is not repair', D02 gap-analysis)
+[17:10:18 +  3.51s] [leak] outcome: PASS (mitigated, not cured — restart reclaims memory; the code fix still needs an L2 human-reviewed PR ('restart is not repair', D02 gap-analysis))
 --- scenario: errors ----------------------------------
-[10:19:12 +  0.00s] [errors] spawn service (port 8813) and wait for readiness
-[service] pid=17134 listening on 127.0.0.1:8813 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8813.json
-[10:19:12 +  0.32s] [errors] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
-[10:19:14 +  1.88s] [errors] PULSE P: alive=True exit=None hb_age=0.31 golden=False
-[10:19:14 +  1.88s] [errors] PULSE U: classified ERRORING | PULSE L: recent change or dependency (delivery layer L6 / service L4)
-[10:19:14 +  1.88s] [errors] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17144 listening on 127.0.0.1:8813 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8813.json
-[10:19:15 +  3.21s] [errors] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=2898ms
-[10:19:15 +  3.22s] [errors] outcome: PASS
+[17:10:18 +  0.00s] [errors] spawn service (port 8813) and wait for readiness
+[service] pid=41880 listening on 127.0.0.1:8813 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8813.json
+[17:10:18 +  0.31s] [errors] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
+[17:10:19 +  1.86s] [errors] PULSE P: alive=True exit=None hb_age=0.29 golden=True
+[17:10:19 +  1.86s] [errors] PULSE U: classified ERRORING | PULSE L: recent change or dependency (delivery layer L6 / service L4)
+[17:10:19 +  1.87s] [errors] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41890 listening on 127.0.0.1:8813 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8813.json
+[17:10:21 +  3.18s] [errors] PULSE E: verification gate → HEALED (heartbeat age 0.25s, golden=PULSE-OK) mttr=2864ms
+[17:10:21 +  3.18s] [errors] outcome: PASS
 --- scenario: crashloop -------------------------------
-[10:19:15 +  0.00s] [crashloop] spawn service (port 8814) and wait for readiness
-[service] pid=17145 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8814.json
-[10:19:16 +  0.32s] [crashloop] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
-[10:19:16 +  0.53s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.48 golden=False
-[10:19:16 +  0.53s] [crashloop] PULSE U: classified CRASHED (crash 1)
-[10:19:16 +  0.54s] [crashloop] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17146 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8814.json
-[10:19:17 +  2.08s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.48 golden=False
-[10:19:17 +  2.08s] [crashloop] PULSE U: classified CRASHED (crash 2)
-[10:19:17 +  2.08s] [crashloop] PULSE S: kill + RESTART #2 (backoff 2.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17147 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8814.json
-[10:19:20 +  4.51s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.37 golden=False
-[10:19:20 +  4.51s] [crashloop] PULSE U: classified CRASHED (crash 3)
-[10:19:20 +  4.51s] [crashloop] PULSE S: kill + RESTART #3 (backoff 4.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
-[service] pid=17148 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/heartbeat-8814.json
-[10:19:24 +  8.94s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.37 golden=False
-[10:19:24 +  8.94s] [crashloop] PULSE U: classified CRASHED (crash 4)
-[10:19:24 +  8.94s] [crashloop] PULSE S: ESCALATE — restart intensity 3 in 30s exceeds MaxR=3 (OTP MaxR/MaxT pattern, D02[1]). Human required. Halting rescheduling.
-[10:19:24 +  8.94s] [crashloop] outcome: PASS (restart storm bounded by design — the healer refuses to thrash (axiom A3: the healer must not harm))
+[17:10:21 +  0.00s] [crashloop] spawn service (port 8814) and wait for readiness
+[service] pid=41891 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8814.json
+[17:10:21 +  0.32s] [crashloop] service HEALTHY (fresh heartbeat + golden PULSE-OK) — injecting fault
+[17:10:21 +  0.53s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.47 golden=False
+[17:10:21 +  0.53s] [crashloop] PULSE U: classified CRASHED (crash 1)
+[17:10:21 +  0.53s] [crashloop] PULSE S: kill + RESTART #1 (backoff 1.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41892 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8814.json
+[17:10:23 +  2.06s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.46 golden=False
+[17:10:23 +  2.06s] [crashloop] PULSE U: classified CRASHED (crash 2)
+[17:10:23 +  2.06s] [crashloop] PULSE S: kill + RESTART #2 (backoff 2.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41893 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8814.json
+[17:10:25 +  4.58s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.47 golden=False
+[17:10:25 +  4.58s] [crashloop] PULSE U: classified CRASHED (crash 3)
+[17:10:25 +  4.58s] [crashloop] PULSE S: kill + RESTART #3 (backoff 4.0s, capped at 8s — kubelet-style crash-loop damping, D02[22])
+[service] pid=41894 listening on 127.0.0.1:8814 heartbeat=/var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/heartbeat-8814.json
+[17:10:30 +  9.10s] [crashloop] PULSE P: alive=False exit=137 hb_age=0.46 golden=False
+[17:10:30 +  9.10s] [crashloop] PULSE U: classified CRASHED (crash 4)
+[17:10:30 +  9.10s] [crashloop] PULSE S: ESCALATE — restart intensity 3 in 30s exceeds MaxR=3 (OTP MaxR/MaxT pattern, D02[1]). Human required. Halting rescheduling.
+[17:10:30 +  9.11s] [crashloop] outcome: PASS (restart storm bounded by design — the healer refuses to thrash (axiom A3: the healer must not harm))
 
 === summary ===
-  crash      PASS  class=CRASHED   action=RESTART#1  mttr=1634ms
-  hang       PASS  class=HUNG      action=RESTART#1  mttr=7954ms
-  leak       PASS  class=LEAKING   action=RESTART#1  mttr=3204ms
-  errors     PASS  class=ERRORING  action=RESTART#1  mttr=2898ms
+  crash      PASS  class=CRASHED   action=RESTART#1  mttr=1621ms
+  hang       PASS  class=HUNG      action=RESTART#1  mttr=7941ms
+  leak       PASS  class=LEAKING   action=RESTART#1  mttr=3188ms
+  errors     PASS  class=ERRORING  action=RESTART#1  mttr=2864ms
   crashloop  PASS  class=CRASHED   action=ESCALATE   mttr=-
 
-healing log (Evolve artifact): /var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-aphy51e1/healing-log.jsonl
+healing log (Evolve artifact): /var/folders/3y/t7svlr0n48j531d1n6zct7j00000gn/T/pulse-demo-81a646ja/healing-log.jsonl
 ALL PASS

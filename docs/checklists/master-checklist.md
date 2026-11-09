@@ -28,24 +28,26 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ Posts 01–08 written: pre-AI history, systems layer, AI era, PULSE framework, prototype walkthrough, small-biz + enterprise playbooks, risks/anti-patterns — each with mermaid diagrams, citation-stamped claims, attribution sections naming originators, and reference lists with URLs
 - [x] ✓ Animations: `animations/pulse-loop.svg` (SMIL, stage pulse + traveling signal + verification gate) and `animations/escalation-ladder.svg` (layered escalation)
 - [x] ✓ Audience-fit pass: each post header states audience + reading time (R9/R10); overview maps posts to reader types
-- [ ] ◐ Video companion links present in posts but MP4s render in Phase 5 — full link audit in Phase 6
+- [x] ✓ Video companion links audited (Phase 6): every post ↔ MP4 pair verified, durations match
 
 ## Phase 5 — Video (`#Step005`)
 - [x] ✓ Pipeline smoke test: `say` → ffmpeg MP4 (9.0s, 104 KB, `docs/video/scripts/smoke-test.sh`; run 2026-11-09)
 - [x] ✓ Production pipeline `scripts/render_episode.py`: script → say narration → SVG slides → QuickLook rasterize → ffmpeg mux/crop → concat MP4 (drawtext unavailable in this ffmpeg build — SVG path chosen, decision documented in script header)
 - [x] ✓ 8 narration scripts committed (`NN-*.md`) — slides + narration separated by design
-- [x] ✓ 8 MP4s rendered (1:34–1:54 each, 1.6–2.0 MB each, 1280×720) — table in `docs/video/README.md`
+- [x] ✓ 8 MP4s rendered — neural narration (edge-tts/Jenny, Decision 006) + slide design system v3 (Decision 007); durations 1:47–2:16
 - [x] ✓ Bidirectional links: every post links its MP4 with duration; video README links companion posts
-- [ ] ☐ Premium/enhanced voice install (optional zero-code upgrade; base voice verified)
+- [x] ✓ Voice quality: neural engine after user feedback (Decision 006); `say` retained as offline fallback
 
 ## Phase 6 — Verification & improvement loop (`#Step006`)
-- [ ] ☐ Audit pass 1 over all artifacts; defects logged and fixed; repeat until zero blocking defects
-- [ ] ☐ Axioms & rules: every draft axiom upgraded to *verified* (evidence linked) or dropped
-- [ ] ☐ External dry-run: diagrams/citations spot-checked in a clean render
+- [x] ✓ Audit pass 1 (2026-11-09): 24/24 checks PASS after analysis — repo clean & pushed; 9/9 prompt histories indexed; all internal links resolve repo-wide; 8/8 videos 720p+audio with durations matching post stamps; 7 anchor numbers consistent across dossiers/synthesis/posts; decisions 001–007 + 5 research docs present with access dates
+- [x] ✓ Mermaid structural check: all subgraph/end + loop/end pairs balanced (4 flags were linter false-positives counting substrings — diagnosis recorded; no real defects)
+- [x] ✓ Prototype re-verified: `demo.sh` 5/5 PASS, exit 0, evidence log refreshed
+- [x] ✓ External dry-run: 8/8 citation URLs live (doi.org, arXiv, kernel.org, k8s.io, erlang.org, AWS, incident.io, METR)
+- [x] ✓ Axioms A1–A12 upgraded draft → **verified**, each with corpus evidence (dossiers, decisions, prototype)
 
 ## Phase 7 — Articles (`#Step007`)
-- [ ] ☐ `eli5.md` · ☐ `entry-level.md` · ☐ `professional.md` · ☐ `c-suite.md`
-- [ ] ☐ Consistency pass: same facts, four altitudes, no contradictions
+- [x] ✓ `eli5.md` (714 w, body/bike-doctor analogy, human-signs-the-prescription) · `entry-level.md` (723 w, six terms + PULSE + first-week checklist) · `professional.md` (699 w, three verdicts + design-review numbers) · `c-suite.md` (733 w, business case + vendor questions + 90-day plan + risk register)
+- [x] ✓ Consistency pass (scripted): shared facts (>$300K/hr, >40% Gartner, ~200 workloads, human-gate, PULSE/five-stage) present and non-contradictory across all four; article links ALL RESOLVE
 
 ## Continuous
 - [x] ✓ Prompt history every turn + INDEX current (protocol: `docs/prompt-histories/README.md`)
@@ -66,3 +68,5 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Posts link audit | PASS | Scripted check: every relative link in all 9 posts resolves to an existing file (research dossiers, architecture docs, decisions, prototype, animations). Mermaid render check deferred to Phase 6 (GitHub render) |
 | 2026-11-09 | Video render + crop check | PASS | 8/8 episodes rendered; extracted frame is 1280×720; corner pixel `0a2445` matches bg `#0B2545` (qlmanage square-letterbox crop verified); durations 94–114s; post↔video links re-audited ALL RESOLVE after wiring |
 | 2026-11-09 | Slide redesign acceptance | PASS | 3-round visual-judge: r1 FAIL (found qlmanage 1.66x clip bug via symptoms), r2 samples PASS, r3 final-MP4 frames PASS (final-title, final-stats in docs/video/verification/). Durations reproduce exactly across slide-only re-renders |
+| 2026-11-09 | Phase 6 audit pass 1 | PASS | 24/24 after analysis (1 mermaid-lint false positive diagnosed: substring vs keyword `end`); prototype 5/5 re-PASS (demo-evidence.log refreshed); 8/8 external URLs live; axioms A1–A12 verified with evidence |
+| 2026-11-09 | Phase 7 articles | PASS | 4/4 written (~700 words each, four altitudes); scripted fact-consistency PASS on 5 shared claims; article link audit PASS |

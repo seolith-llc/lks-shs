@@ -30,7 +30,7 @@ A research, architecture, and content project on **self-healing software**: syst
 - [x] Phase 1 — Research (`#Step001`) — 4 dossiers, 180 verified sources
 - [x] Phase 2 — Synthesis: **PULSE** loop (provisional) + unified taxonomy
 - [x] Phase 3 — Architecture, patterns, prototypes — reference architecture, 6 sequence diagrams, pattern catalog, decisions 001–005, PULSE prototype (5/5 PASS)
-- [ ] Phase 4 — Post series (diagrams, animations, attribution)
-- [ ] Phase 5 — Video content linked to posts
-- [ ] Phase 6 — Verification & improvement loop (checklist, rules, axioms)
-- [ ] Phase 7 — Four audience articles (ELI5 / entry-level / professional / C-level)
+- [x] Phase 4 — Post series — 9 posts + animated SVGs, link-audited
+- [x] Phase 5 — Video — 8 narrated episodes (neural voice + slide design system, decisions 006–007)
+- [x] Phase 6 — Verification loop — 24/24 audit PASS, axioms A1–A12 verified, URLs live
+- [x] Phase 7 — Four audience articles (ELI5 / entry-level / professional / C-level), consistency-checked
