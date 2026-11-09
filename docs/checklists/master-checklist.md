@@ -7,7 +7,7 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 ## Phase 1 — Research (`#Step001`)
 - [x] ✓ `docs/research/01-academic-foundations.md` — 33 verified sources, canonical refs, corrections documented (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [x] ✓ `docs/research/02-pre-ai-foundations.md` — 48 verified sources, 24-row pattern catalog, gap analysis (spot-check PASS 2026-11-09; Phase 6 full audit pending)
-- [ ] ◐ `docs/research/03-systems-domain.md` — ≥20 verified sources, layered toolbox
+- [x] ✓ `docs/research/03-systems-domain.md` — 51 verified sources, layered toolbox table, verified AI-era systems examples (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [ ] ◐ `docs/research/04-ai-era-and-business.md` — ≥25 verified sources, product landscape
 - [ ] ☐ Synthesis doc unifying the taxonomy (Phase 2 input)
 
@@ -55,3 +55,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Toolchain | PASS | ffmpeg 9.0.1, python 3.14.7, node, docker present; 185 macOS voices (0 premium installed) |
 | 2026-11-09 | Dossier 01 spot-check | PASS | ~330 lines: TL;DR, timeline (1956→2026), 5 deep dives, self-* taxonomy with detect/diagnose/recover/learn, key numbers, before/after-AI table, 12 canonical + 33 full sources, 7 open questions; [UNVERIFIED] discipline observed; 3 brief corrections verified |
 | 2026-11-09 | Dossier 02 spot-check | PASS | ~250 lines: TL;DR, unifying healing-loop table (15 systems × observe/decide/act/feedback), 8 deep dives, 24-row pattern catalog, cited key numbers (243× retry math, nine-nines debunk, outage costs), 7-point gap analysis, 48-entry source list, 6 open questions; RAID paper honestly [UNVERIFIED] |
+| 2026-11-09 | Dossier 03 spot-check | PASS | 389 lines: TL;DR, 19-row layered toolbox (hardware→kernel→process→storage→AI), 6 deep dives (livepatch/Ksplice 88%, watchdogs, EDAC, eBPF, ZFS/WAL/Raft), prevention section (70% memory-safety stats, Android 76%→24%), verified pre-LLM + LLM-era AI systems (Getafix/SapFix, OSS-Fuzz AI, Big Sleep, Triangle, RCACopilot, KernelGPT, SWE-InfraBench 34%), 51 refs, folklore flagged [UNVERIFIED] |
