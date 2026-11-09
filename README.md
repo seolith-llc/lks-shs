@@ -1,5 +1,7 @@
 # LKS-SHS — Self-Healing Software, Engineered with AI
 
+**Repository:** https://github.com/seolith-llc/lks-shs
+
 A research, architecture, and content project on **self-healing software**: systems that detect, diagnose, and repair themselves — from kernel-level mechanisms to LLM-driven remediation agents — covering **system programming**, **application programming**, and the needs of **small businesses** and **enterprises**.
 
 ## Repository layout
