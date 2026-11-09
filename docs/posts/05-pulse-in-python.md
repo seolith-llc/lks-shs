@@ -1,7 +1,7 @@
 # Part 5 · PULSE in ~600 Lines of Python
 
 *Series: [Overview](00-series-overview.md) · [Part 4](04-the-pulse-framework.md) · **Part 5** · [Part 6](06-the-small-business-playbook.md)*
-**Audience:** builders · ~8 min · Video companion: [`docs/video/05-prototype-demo.mp4`](../video/05-prototype-demo.mp4) — 1:40 narrated
+**Audience:** builders · ~8 min · Video companion: [`docs/video/05-prototype-demo.mp4`](../video/05-prototype-demo.mp4) — 1:53 narrated
 
 > Reading about healing loops is like reading about swimming. Here's water: **clone the repo and run `./demo.sh`** — you get a service you can crash, hang, leak, and enrage, and a supervisor that heals it while narrating every PULSE stage. Stdlib only. Verified: 5/5 scenarios PASS. [Code](../../prototypes/pulse-app/) · [Evidence log](../../prototypes/pulse-app/demo-evidence.log)
 

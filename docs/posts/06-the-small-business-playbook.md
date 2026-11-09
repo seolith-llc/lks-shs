@@ -1,7 +1,7 @@
 # Part 6 · The Small-Business Playbook ($0–50/month)
 
 *Series: [Overview](00-series-overview.md) · [Part 5](05-pulse-in-python.md) · **Part 6** · [Part 7](07-the-enterprise-playbook.md)*
-**Audience:** 1–20 person shops, no SRE team · ~7 min · Video companion: [`docs/video/06-small-business.mp4`](../video/06-small-business.mp4) — 1:38 narrated
+**Audience:** 1–20 person shops, no SRE team · ~7 min · Video companion: [`docs/video/06-small-business.mp4`](../video/06-small-business.mp4) — 1:54 narrated
 
 > You cannot buy an AI SRE. Every agentic incident product on the verified market is enterprise-priced or custom-quoted [1][2][3]. What you *can* have — tonight, for roughly the price of one coffee per month — is genuine self-healing: detection that never sleeps, restarts that happen without you, deploys that roll themselves back, and backups you have actually restored. The binding constraint is discipline, not money.
 

@@ -1,7 +1,7 @@
 # Part 2 · Self-Healing in the Systems Layer
 
 *Series: [Overview](00-series-overview.md) · [Part 1](01-seventy-years-of-self-healing.md) · **Part 2** · [Part 3](03-the-ai-era-what-actually-shipped.md)*
-**Audience:** system programmers, infrastructure engineers · ~8 min · Video companion: [`docs/video/02-systems-layer.mp4`](../video/02-systems-layer.mp4) — 1:52 narrated
+**Audience:** system programmers, infrastructure engineers · ~8 min · Video companion: [`docs/video/02-systems-layer.mp4`](../video/02-systems-layer.mp4) — 2:06 narrated
 
 > The kernel under your web app right now can be **patched mid-flight, without rebooting, in about 0.7 milliseconds of interruption** — and this has been true since Ksplice (2009) proved 88% of kernel security vulnerabilities need no new code, just redirected function calls [1][2].
 

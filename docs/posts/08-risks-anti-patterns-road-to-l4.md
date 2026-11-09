@@ -1,7 +1,7 @@
 # Part 8 · Risks, Anti-Patterns, and the Road to L4
 
 *Series: [Overview](00-series-overview.md) · [Part 7](07-the-enterprise-playbook.md) · **Part 8** (finale)*
-**Audience:** everyone who signs off on autonomy · ~8 min · Video companion: [`docs/video/08-risks.mp4`](../video/08-risks.mp4) — 1:54 narrated
+**Audience:** everyone who signs off on autonomy · ~8 min · Video companion: [`docs/video/08-risks.mp4`](../video/08-risks.mp4) — 2:16 narrated
 
 > Every healing mechanism in this series can fail, and most fail in one of eight documented ways. The good news: each has a control with a verified precedent. The bad news: the controls are boring infrastructure, so organizations skip them for prompts.
 

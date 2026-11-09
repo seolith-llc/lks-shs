@@ -1,7 +1,7 @@
 # Part 3 · The AI Era: What Actually Shipped (2024–2026)
 
 *Series: [Overview](00-series-overview.md) · [Part 2](02-the-systems-layer.md) · **Part 3** · [Part 4](04-the-pulse-framework.md)*
-**Audience:** engineers and buyers who need the frontier, not the press release · ~9 min · Video companion: [`docs/video/03-ai-era.mp4`](../video/03-ai-era.mp4) — 1:53 narrated
+**Audience:** engineers and buyers who need the frontier, not the press release · ~9 min · Video companion: [`docs/video/03-ai-era.mp4`](../video/03-ai-era.mp4) — 2:04 narrated
 
 > 2025 was the year "AI SRE" became a **shipping product category** — and the industry converged, almost word for word, on the same safety line: *investigate autonomously, remediate through human gates.* [1][2][3][4]
 

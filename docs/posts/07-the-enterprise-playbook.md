@@ -1,7 +1,7 @@
 # Part 7 · The Enterprise Playbook
 
 *Series: [Overview](00-series-overview.md) · [Part 6](06-the-small-business-playbook.md) · **Part 7** · [Part 8](08-risks-anti-patterns-road-to-l4.md)*
-**Audience:** platform/SRE leads, engineering directors · ~9 min · Video companion: [`docs/video/07-enterprise.mp4`](../video/07-enterprise.mp4) — 1:50 narrated
+**Audience:** platform/SRE leads, engineering directors · ~9 min · Video companion: [`docs/video/07-enterprise.mp4`](../video/07-enterprise.mp4) — 2:05 narrated
 
 > The economics are almost absurd: downtime runs **>$300K/hour for 90%+ of firms** (ITIC 2024) [1], 54% of significant outages cost >$100K and 1-in-5 exceed $1M (Uptime Institute 2025) [2], and the Global 2000 lose an estimated **$400B/year** (Oxford Economics/Splunk) [3]. A $50/user/month tool that shaves minutes off MTTR pays for itself per incident. The risk isn't the spend — it's **unmeasured autonomy**: Gartner expects >40% of agentic AI projects to be canceled by end-2027, mostly on cost, unclear value, and inadequate risk controls [4].
 

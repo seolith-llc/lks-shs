@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render a PULSE episode: markdown script -> macOS `say` narration -> SVG slides
+"""Render a PULSE episode: markdown script -> neural TTS narration -> SVG slides
 -> QuickLook rasterization -> ffmpeg -> MP4.
 
 Script format (see docs/video/[0-9][0-9]-*.md episodes):
@@ -7,12 +7,18 @@ Script format (see docs/video/[0-9][0-9]-*.md episodes):
     - on-screen bullet (display only, never spoken)
     Narration paragraph — spoken, never shown.
 
+Narration engines (Decision 006):
+  --engine edge  (default when available): Microsoft neural voices via edge-tts
+                 running in scripts/.venv — studio-grade naturalness, zero cost,
+                 no API key; narration text is processed by Microsoft's endpoint.
+  --engine say   (offline fallback): macOS `say` voices — fully local, robotic.
+
 Why SVG+qlmanage instead of ffmpeg drawtext: this machine's ffmpeg build has
 no text filters (no libfreetype/libass), and the SVG route is fully portable
 anyway — the slide generator below shares its palette and typography with the
 series' animated SVGs (docs/posts/animations/).
 
-Usage: render_episode.py <script.md> [<out.mp4>] [--voice Samantha]
+Usage: render_episode.py <script.md> [<out.mp4>] [--engine edge] [--voice en-US-JennyNeural]
 """
 import argparse
 import html
@@ -24,6 +30,8 @@ import tempfile
 
 W, H, FPS = 1280, 720, 30
 BG, ACCENT, WHITE, MUTED = "#0B2545", "#FFD166", "#E0FBFC", "#8DA9C4"
+HERE = os.path.dirname(os.path.abspath(__file__))
+VENV_PY = os.path.join(HERE, ".venv", "bin", "python")
 
 
 def parse_script(path: str) -> list[dict]:
@@ -116,11 +124,25 @@ def rasterize(svg_path: str, png_path: str) -> None:
     os.replace(thumb, png_path)
 
 
+def synth(text: str, out_audio: str, engine: str, voice: str) -> None:
+    if engine == "edge":
+        if not os.path.exists(VENV_PY):
+            sys.exit("edge-tts venv missing — create it: python3 -m venv scripts/.venv && "
+                     "scripts/.venv/bin/pip install edge-tts (or use --engine say)")
+        subprocess.run([VENV_PY, "-m", "edge_tts", "--voice", voice,
+                        "--text", text, "--write-media", out_audio], check=True)
+    else:
+        subprocess.run(["say", "-v", voice, "-o", out_audio, text], check=True)
+
+
 def main() -> None:
+    default_engine = "edge" if os.path.exists(VENV_PY) else "say"
+    default_voice = "en-US-JennyNeural" if default_engine == "edge" else "Samantha"
     ap = argparse.ArgumentParser()
     ap.add_argument("script")
     ap.add_argument("out", nargs="?")
-    ap.add_argument("--voice", default="Samantha")
+    ap.add_argument("--engine", choices=("edge", "say"), default=default_engine)
+    ap.add_argument("--voice", default=default_voice)
     args = ap.parse_args()
 
     sections = parse_script(args.script)
@@ -130,12 +152,13 @@ def main() -> None:
     work = tempfile.mkdtemp(prefix="pulse-vid-")
     parts = []
     total = len(sections)
+    ext = "mp3" if args.engine == "edge" else "aiff"
 
     for i, sec in enumerate(sections):
-        aiff = os.path.join(work, f"s{i:02d}.aiff")
-        subprocess.run(["say", "-v", args.voice, "-o", aiff, sec["narration"]], check=True)
+        audio = os.path.join(work, f"s{i:02d}.{ext}")
+        synth(sec["narration"], audio, args.engine, args.voice)
         dur = float(sh(["ffprobe", "-v", "error", "-show_entries", "format=duration",
-                        "-of", "default=nw=1:nk=1", aiff]))
+                        "-of", "default=nw=1:nk=1", audio]))
 
         svg = os.path.join(work, f"s{i:02d}.svg")
         open(svg, "w").write(slide_svg(sec["title"], sec["bullets"], i + 1, total))
@@ -145,7 +168,7 @@ def main() -> None:
         part = os.path.join(work, f"p{i:02d}.ts")
         subprocess.run(
             ["ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
-             "-loop", "1", "-framerate", str(FPS), "-i", png, "-i", aiff,
+             "-loop", "1", "-framerate", str(FPS), "-i", png, "-i", audio,
              "-af", "apad=pad_dur=0.8",
              "-vf", f"crop={W}:{H}",  # qlmanage letterboxes into a square canvas
              "-map", "0:v", "-map", "1:a", "-t", f"{dur + 0.8:.2f}",

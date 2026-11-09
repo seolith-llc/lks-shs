@@ -1,7 +1,7 @@
 # Part 4 · The PULSE Framework
 
 *Series: [Overview](00-series-overview.md) · [Part 3](03-the-ai-era-what-actually-shipped.md) · **Part 4** · [Part 5](05-pulse-in-python.md)*
-**Audience:** architects, tech leads · ~10 min · Video companion: [`docs/video/04-pulse-framework.mp4`](../video/04-pulse-framework.mp4) — 1:34 narrated
+**Audience:** architects, tech leads · ~10 min · Video companion: [`docs/video/04-pulse-framework.mp4`](../video/04-pulse-framework.mp4) — 1:47 narrated
 
 > **PULSE — Perceive · Understand · Localize · Solve · Evolve.** One loop, at every layer, from ECC memory to the incident channel. The name is literal: the heartbeat — dead-man's-switch, liveness probe, Raft heartbeat, `sd_notify` — is the one health primitive that exists at every layer of the stack. (*Why this name and not REPAIR/HEAL/CURE: five candidates, weighted trade-offs, in [Decision 001](../architecture/decisions/001-acronym.md).)*
 

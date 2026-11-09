@@ -25,3 +25,6 @@ tmp/
 .env
 .env.*
 *.pem
+
+# video TTS venv (edge-tts)
+docs/video/scripts/.venv/
