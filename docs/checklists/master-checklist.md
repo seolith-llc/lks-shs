@@ -8,8 +8,8 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ `docs/research/01-academic-foundations.md` — 33 verified sources, canonical refs, corrections documented (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [x] ✓ `docs/research/02-pre-ai-foundations.md` — 48 verified sources, 24-row pattern catalog, gap analysis (spot-check PASS 2026-11-09; Phase 6 full audit pending)
 - [x] ✓ `docs/research/03-systems-domain.md` — 51 verified sources, layered toolbox table, verified AI-era systems examples (spot-check PASS 2026-11-09; Phase 6 full audit pending)
-- [ ] ◐ `docs/research/04-ai-era-and-business.md` — ≥25 verified sources, product landscape
-- [ ] ☐ Synthesis doc unifying the taxonomy (Phase 2 input)
+- [x] ✓ `docs/research/04-ai-era-and-business.md` — 48 verified sources, product landscape, small-biz/enterprise playbooks, risk-to-control mapping (spot-check PASS 2026-11-09; Phase 6 full audit pending)
+- [ ] ◐ Synthesis doc unifying the taxonomy (Phase 2 input) — being written now
 
 ## Phase 2 — Synthesis (`#Step002`)
 - [ ] ☐ Acronym decision record: 3–5 candidates, trade-off table, recommendation, decision
@@ -56,3 +56,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Dossier 01 spot-check | PASS | ~330 lines: TL;DR, timeline (1956→2026), 5 deep dives, self-* taxonomy with detect/diagnose/recover/learn, key numbers, before/after-AI table, 12 canonical + 33 full sources, 7 open questions; [UNVERIFIED] discipline observed; 3 brief corrections verified |
 | 2026-11-09 | Dossier 02 spot-check | PASS | ~250 lines: TL;DR, unifying healing-loop table (15 systems × observe/decide/act/feedback), 8 deep dives, 24-row pattern catalog, cited key numbers (243× retry math, nine-nines debunk, outage costs), 7-point gap analysis, 48-entry source list, 6 open questions; RAID paper honestly [UNVERIFIED] |
 | 2026-11-09 | Dossier 03 spot-check | PASS | 389 lines: TL;DR, 19-row layered toolbox (hardware→kernel→process→storage→AI), 6 deep dives (livepatch/Ksplice 88%, watchdogs, EDAC, eBPF, ZFS/WAL/Raft), prevention section (70% memory-safety stats, Android 76%→24%), verified pre-LLM + LLM-era AI systems (Getafix/SapFix, OSS-Fuzz AI, Big Sleep, Triangle, RCACopilot, KernelGPT, SWE-InfraBench 34%), 51 refs, folklore flagged [UNVERIFIED] |
+| 2026-11-09 | Dossier 04 spot-check | PASS | 294 lines: TL;DR, product landscape tables (AI-SRE platforms, startups, code-fixing AI) with autonomy levels + pricing, builder-vs-healer analysis, small-biz $0–50/mo playbook with 3 a.m. walkthrough, enterprise governance + L0–L4 rollout ladder, cross-source key-numbers with comparability note, 8 risks + risk-to-control mapping + negative results, 48 refs, vendor claims flagged as such |
