@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+.venv/
+venv/
+*.pyc
+
+# Video/audio intermediates (finals are committed under docs/video/)
+tmp/
+*.tmp
+
+# Secrets
+.env
+.env.*
+*.pem
