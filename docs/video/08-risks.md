@@ -33,7 +33,7 @@ Notice the pattern: boring controls cover multiple exciting risks. Validators th
 - ❌ first-party autonomous-remediation account w/ audit trail
 - ❌ independently audited MTTR study of any AI-SRE
 - ❌ audit standards covering agent actions
-- ❌ sub-$100/month agentic IR for small business
+-! 0 | verified first-party L4 closed-loop deployments
 
 What nobody has shipped yet: a first party account of a fully autonomous remediation decision with its audit trail. An independently audited recovery study of any A I S R E product. Audit standards that name agent actions. An affordable agentic product for small business. Cross rung four when those turn into check marks, one at a time.
 

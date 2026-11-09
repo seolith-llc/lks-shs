@@ -8,9 +8,9 @@
 Part two goes down the stack, to the layer that healed itself long before anyone said A I ops: hardware, kernels, and storage.
 
 ## Patch the kernel mid-flight
-- Ksplice (2009): 88% of kernel CVEs, no reboot
-- interruption: ~0.7 milliseconds
 - the wall: data-structure changes still need a reboot
+-! 88% | of kernel CVEs live-patchable, no reboot (Ksplice, 2009)
+-! 0.7 ms | total interruption while patching
 
 The kernel under your web app can be patched while it runs. Ksplice proved in two thousand nine that eighty eight percent of kernel security vulnerabilities need no new code, just redirected function calls, at about point seven milliseconds of interruption. Every live patcher still shares one hard wall: changes to data structure semantics require a reboot.
 
@@ -29,8 +29,8 @@ The pattern to remember is the two level supervision chain. The hardware watchdo
 Below that, storage heals without any intelligence at all. Z F S checksums every block and repairs bad ones from redundancy. Postgres replays its write ahead log to consistency after any crash. Raft clusters re-elect a failed leader in a fraction of a second.
 
 ## Prevention is measurable
-- ~70% of Microsoft + Chromium CVEs: memory safety
-- Android: 76% → 24% memory-safety share (2019–2024), via Rust
+-! ~70% | of Microsoft + Chromium CVEs are memory-safety issues
+-! 76% → 24% | Android memory-safety share, 2019–2024 (Rust)
 - OSS-Fuzz: 36,000+ bugs fixed automatically
 
 And the cheapest cure is preventing the wound. Around seventy percent of Microsoft and Chromium vulnerabilities are memory safety issues. Android wrote new code in Rust and cut its memory safety share from seventy six percent to twenty four in five years. O S S Fuzz has fixed thirty six thousand bugs with fully automated plumbing.

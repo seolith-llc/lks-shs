@@ -31,9 +31,9 @@ You can inject five wounds, and each one teaches a finding from the research. Cr
 The best scenario is the crashloop. Crash the service faster than the restart window allows, and after the third restart the supervisor refuses to reschedule. It escalates and pages a human instead of thrashing. That is Erlang's restart intensity pattern, and it is the healer protecting the patient from the healer.
 
 ## Verified evidence
-- demo run: 5/5 scenarios PASS
-- MTTRs: crash 1.6s · hang 7.9s · leak 3.2s · errors 2.9s
 - every event logged with stages, triage, MTTR
+-! 5/5 | demo scenarios PASS
+-! 1.6–7.9 s | MTTR range across all wounds
 
 This is not a mockup. The committed evidence log shows five out of five scenarios passing, with mean time to recovery between one point six and seven point nine seconds, and every healing event logged as an evolve artifact.
 

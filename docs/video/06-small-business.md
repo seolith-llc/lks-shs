@@ -38,8 +38,8 @@ Tier two is the real healer: backups you have actually restored. Restic gives yo
 Picture three a.m. The bad deploy rolled itself back. The crashed worker restarted itself. The silent backup failure paged you at a civilized hour because it failed to check in. And the mystery errors? A bounded script can collect the logs and summarize candidate causes for the human who decides.
 
 ## The honest budget
-- $5–15 hosting + $0–5 backups + $0–20 managed upgrades
 - the binding constraint is discipline, not money
 - five runbook cards for your top five failures
+-! $0–50/mo | the complete self-healing budget
 
 The whole stack runs five to fifteen dollars a month for hosting plus a few for backups. The binding constraint is discipline: restore drills, five runbook cards, alerting simple enough that pages get read. Next: the enterprise playbook.

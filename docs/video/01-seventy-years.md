@@ -8,8 +8,7 @@
 Welcome to the series. Self-healing software sounds like an AI-age promise. It isn't. The ideas are seventy years old, and the story of what actually changed is better than the marketing.
 
 ## The nine nines myth
-- Erlang AXD301: "99.9999999% availability"
-- Source: a PowerPoint slide — per Armstrong's own thesis
+-! 99.9999999% | AXD301 availability claim — from an undocumented slide
 - Lesson: healing claims are cheap, evidence is precious
 
 Start with a myth-bust. The most quoted reliability number in our field, the nine nines claim for the Ericsson Erlang switch, comes, in Joe Armstrong's own thesis, from a PowerPoint presentation whose methodology, in his words, was not documented. Hold that skepticism through everything.
@@ -31,7 +30,8 @@ Strip the branding, and every mechanism across those seventy years is the same l
 ## Where it broke before AI
 - sensing: solved · actuation: solved
 - the decide stage: frozen — thresholds + a paged human
-- restart is not repair · naive retry amplifies load 243 times
+- restart is not repair
+-! 243× | worst-case load amplification from naive retries
 
 Before AI, sensing and actuation were solved. What stayed frozen was the decide stage: hand-tuned thresholds ending in a human with a runbook at three a.m. And it failed in documented ways. Restart is not repair; a deterministic bug just crash-loops. Naive retries can multiply load on a failing dependency by two hundred forty three times.
 

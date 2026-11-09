@@ -8,9 +8,9 @@
 Part seven is for platform and S R E leads. The economics are almost absurd; the risk is unmeasured autonomy.
 
 ## The economics
-- downtime > $300K/hour for 90% of firms (ITIC)
 - 54% of significant outages cost >$100K (Uptime Institute)
-- Global 2000: ~$400B/year (Oxford Economics/Splunk)
+-! >$300K/hr | downtime cost for 90% of firms (ITIC)
+-! ~$400B/yr | losses across the Global 2000 (Oxford Economics)
 
 Downtime runs over three hundred thousand dollars an hour for ninety percent of firms. One in five significant outages costs more than a million. Across the Global two thousand, roughly four hundred billion a year. A fifty dollar per user tool that shaves minutes off recovery pays for itself per incident.
 
