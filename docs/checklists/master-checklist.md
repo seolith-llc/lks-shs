@@ -24,9 +24,11 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ Prototype demo evidence — `demo-evidence.log`: 5/5 scenarios PASS, exit 0 (2026-11-09)
 
 ## Phase 4 — Posts (`#Step004`)
-- [ ] ☐ Series overview with cross-links + per-post attribution sections
-- [ ] ☐ Each post: mermaid diagrams render on GitHub, animations work, all claims cross-reference dossiers
-- [ ] ☐ Audience-fit pass (which post serves which reader)
+- [x] ✓ Series overview (00) with cross-links + series-map table + "how this was built" trust section
+- [x] ✓ Posts 01–08 written: pre-AI history, systems layer, AI era, PULSE framework, prototype walkthrough, small-biz + enterprise playbooks, risks/anti-patterns — each with mermaid diagrams, citation-stamped claims, attribution sections naming originators, and reference lists with URLs
+- [x] ✓ Animations: `animations/pulse-loop.svg` (SMIL, stage pulse + traveling signal + verification gate) and `animations/escalation-ladder.svg` (layered escalation)
+- [x] ✓ Audience-fit pass: each post header states audience + reading time (R9/R10); overview maps posts to reader types
+- [ ] ◐ Video companion links present in posts but MP4s render in Phase 5 — full link audit in Phase 6
 
 ## Phase 5 — Video (`#Step005`)
 - [x] ✓ Pipeline smoke test: `say` → ffmpeg MP4 (9.0s, 104 KB, `docs/video/scripts/smoke-test.sh`; run 2026-11-09)
@@ -59,3 +61,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Dossier 04 spot-check | PASS | 294 lines: TL;DR, product landscape tables (AI-SRE platforms, startups, code-fixing AI) with autonomy levels + pricing, builder-vs-healer analysis, small-biz $0–50/mo playbook with 3 a.m. walkthrough, enterprise governance + L0–L4 rollout ladder, cross-source key-numbers with comparability note, 8 risks + risk-to-control mapping + negative results, 48 refs, vendor claims flagged as such |
 | 2026-11-09 | Synthesis + Decision 001 | PASS | 00-synthesis.md unifies 4 dossiers (180 sources): canonical 5-stage loop, 7-layer stack, AI builder-vs-healer, L0–L4 ladder, 15 anchor numbers, small-biz/enterprise split, naming requirements. Decision 001: 5 acronym candidates, weighted trade-off matrix, PULSE accepted provisionally (question unanswered; user override open) with canonical stage definitions |
 | 2026-11-09 | Prototype demo run | PASS | `demo.sh` → 5/5 scenarios PASS, exit 0: crash MTTR 1.6s, hang 7.9s, leak 3.2s (+ "mitigated not cured" note), errors 2.9s, crashloop → ESCALATE at MaxR=3/30s. Evidence: `prototypes/pulse-app/demo-evidence.log` |
+| 2026-11-09 | Posts link audit | PASS | Scripted check: every relative link in all 9 posts resolves to an existing file (research dossiers, architecture docs, decisions, prototype, animations). Mermaid render check deferred to Phase 6 (GitHub render) |

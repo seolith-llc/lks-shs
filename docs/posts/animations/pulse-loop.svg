@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="440" viewBox="0 0 640 440" role="img" aria-label="The PULSE loop: Perceive, Understand, Localize, Solve, Evolve — five stages pulsing in sequence around a ring, with the verification gate between Solve and Evolve.">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8DA9C4"/>
+    </marker>
+    <path id="ring" d="M 320,90 A 130,130 0 1 1 319.9,90" fill="none"/>
+  </defs>
+
+  <rect width="640" height="440" rx="12" fill="#0B2545"/>
+  <text x="320" y="34" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" fill="#E0FBFC" font-weight="600">The PULSE loop — the heartbeat of a self-healing system</text>
+
+  <!-- ring arcs between stages (clockwise) -->
+  <g stroke="#8DA9C4" stroke-width="2.5" fill="none" opacity="0.85">
+    <path d="M 354,90 A 130,130 0 0 1 431,141" marker-end="url(#arr)"/>
+    <path d="M 456,197 A 130,130 0 0 1 431,309" marker-end="url(#arr)"/>
+    <path d="M 372,349 A 130,130 0 0 1 268,349" marker-end="url(#arr)"/>
+    <path d="M 209,309 A 130,130 0 0 1 184,197" marker-end="url(#arr)"/>
+    <path d="M 209,141 A 130,130 0 0 1 286,90" marker-end="url(#arr)"/>
+  </g>
+
+  <!-- traveling dot: the signal flowing forever around the loop -->
+  <circle r="6" fill="#FFD166">
+    <animateMotion dur="5s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#ring"/>
+    </animateMotion>
+  </circle>
+
+  <!-- stage nodes, pulsing in sequence -->
+  <g font-family="system-ui, sans-serif" text-anchor="middle">
+    <circle cx="320" cy="90" r="34" fill="#2EC4B6">
+      <animate attributeName="r" values="30;38;30" dur="2.5s" begin="0s" repeatCount="indefinite"/>
+    </circle>
+    <text x="320" y="97" font-size="22" fill="#0B2545" font-weight="700">P</text>
+    <text x="320" y="46" font-size="13" fill="#E0FBFC">Perceive — signals</text>
+
+    <circle cx="444" cy="180" r="34" fill="#FF9F1C">
+      <animate attributeName="r" values="30;38;30" dur="2.5s" begin="0.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="444" y="187" font-size="22" fill="#0B2545" font-weight="700">U</text>
+    <text x="530" y="177" font-size="13" fill="#E0FBFC">Understand</text>
+    <text x="530" y="192" font-size="13" fill="#E0FBFC">classify + RCA</text>
+
+    <circle cx="396" cy="325" r="34" fill="#E71D36">
+      <animate attributeName="r" values="30;38;30" dur="2.5s" begin="1.0s" repeatCount="indefinite"/>
+    </circle>
+    <text x="396" y="332" font-size="22" fill="#fff" font-weight="700">L</text>
+    <text x="428" y="392" font-size="13" fill="#E0FBFC">Localize — component / line / config</text>
+
+    <circle cx="244" cy="325" r="34" fill="#4CC9F0">
+      <animate attributeName="r" values="30;38;30" dur="2.5s" begin="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <text x="244" y="332" font-size="22" fill="#0B2545" font-weight="700">S</text>
+    <text x="244" y="392" font-size="13" fill="#E0FBFC">Solve — restart · rollback · patch</text>
+
+    <circle cx="196" cy="180" r="34" fill="#9EF01A">
+      <animate attributeName="r" values="30;38;30" dur="2.5s" begin="2.0s" repeatCount="indefinite"/>
+    </circle>
+    <text x="196" y="187" font-size="22" fill="#0B2545" font-weight="700">E</text>
+    <text x="110" y="177" font-size="13" fill="#E0FBFC">Evolve — verify,</text>
+    <text x="110" y="192" font-size="13" fill="#E0FBFC">learn, harden</text>
+  </g>
+
+  <!-- verification gate marker on the S→E arc -->
+  <g>
+    <rect x="252" y="262" width="136" height="22" rx="11" fill="#0B2545" stroke="#FFD166" stroke-width="1.5"/>
+    <text x="320" y="277" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#FFD166">verification gate (non-AI)</text>
+    <rect x="252" y="262" width="136" height="22" rx="11" fill="#FFD166" opacity="0.25">
+      <animate attributeName="opacity" values="0.05;0.45;0.05" dur="2.5s" begin="1.75s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <text x="320" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="26" fill="#E0FBFC" font-weight="700">PULSE</text>
+  <text x="320" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#8DA9C4">nothing is healed until the gate says so</text>
+  <text x="320" y="426" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8DA9C4">lks-shs · docs/architecture/decisions/001-acronym.md</text>
+</svg>
