@@ -49,6 +49,16 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ `eli5.md` (714 w, body/bike-doctor analogy, human-signs-the-prescription) · `entry-level.md` (723 w, six terms + PULSE + first-week checklist) · `professional.md` (699 w, three verdicts + design-review numbers) · `c-suite.md` (733 w, business case + vendor questions + 90-day plan + risk register)
 - [x] ✓ Consistency pass (scripted): shared facts (>$300K/hr, >40% Gartner, ~200 workloads, human-gate, PULSE/five-stage) present and non-contradictory across all four; article links ALL RESOLVE
 
+## Phase 8 — Distribution pack (`#Step008`)
+- [x] ✓ Renderer extended to 9:16 vertical (`--format vertical`, square-canvas rule honored: 1920-square, 1080×1920 band)
+- [x] ✓ 4 shorts written + rendered (46–54 s, ~0.9–1.0 MB): nine-nines myth, 243× retry storm, 200-workloads story, PULSE in 45 s — `docs/video/shorts/`
+- [x] ✓ Shorts acceptance: title card PASS, vertical stat card PASS (visual-judge, frame extracted from final MP4)
+- [x] ✓ 8 YouTube thumbnails rendered + cropped 1280×720 (`publish/youtube/thumbs/`), thumb-02 visual-judge PASS
+- [x] ✓ YouTube metadata pack: titles, description template, tags, shorts captions (`publish/youtube/README.md`)
+- [x] ✓ Platform copy: X 10-post thread, Bluesky 6-skeet thread, LinkedIn, IG/TikTok captions + 10-slide carousel plan, Show HN + Reddit + Lobsters with timing etiquette (`publish/copy/`)
+- [x] ✓ dev.to exports: 8 articles with front-matter, canonical URLs to GitHub, links absolutized (`publish/articles/devto/`)
+- [x] ✓ Automation stubs (credential-gated, dry-run by default): `bluesky_post.py` (6 skeets parsed, dry-run OK), `devto_publish.py` (payload dry-run OK) — X/IG/TikTok/YouTube documented as manual (API tiers/review)
+
 ## Continuous
 - [x] ✓ Prompt history every turn + INDEX current (protocol: `docs/prompt-histories/README.md`)
 - [x] ✓ Git milestone commits
@@ -70,3 +80,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Slide redesign acceptance | PASS | 3-round visual-judge: r1 FAIL (found qlmanage 1.66x clip bug via symptoms), r2 samples PASS, r3 final-MP4 frames PASS (final-title, final-stats in docs/video/verification/). Durations reproduce exactly across slide-only re-renders |
 | 2026-11-09 | Phase 6 audit pass 1 | PASS | 24/24 after analysis (1 mermaid-lint false positive diagnosed: substring vs keyword `end`); prototype 5/5 re-PASS (demo-evidence.log refreshed); 8/8 external URLs live; axioms A1–A12 verified with evidence |
 | 2026-11-09 | Phase 7 articles | PASS | 4/4 written (~700 words each, four altitudes); scripted fact-consistency PASS on 5 shared claims; article link audit PASS |
+| 2026-11-09 | Phase 8 shorts + thumbs | PASS | 4/4 vertical shorts 1080×1920 (46–54 s); visual-judge PASS on title + stat frames from final MP4s; 8/8 thumbnails 1280×720, thumb-02 PASS; dev.to exports 8/8 + both automation stubs dry-run OK |

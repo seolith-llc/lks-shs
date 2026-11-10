@@ -14,7 +14,9 @@ A research, architecture, and content project on **self-healing software**: syst
 | `docs/posts/` | The public post series (cross-post ready, diagrams + animations + attribution) |
 | `docs/articles/` | Audience-specific articles (ELI5 → entry-level → professional → C-suite) |
 | `docs/checklists/` | Checklists, reference rules, axioms, verification records |
-| `docs/video/` | Scripts, storyboards, rendered videos linked to posts |
+| `docs/video/` | Scripts, storyboards, rendered videos (8 episodes + 4 vertical shorts) linked to posts |
+| `docs/articles/` | Audience-specific articles (ELI5 → entry-level → professional → C-suite) |
+| `publish/` | Distribution pack: platform copy, YouTube metadata + thumbnails, dev.to exports, automation stubs |
 | `prototypes/` | Runnable prototype code |
 
 ## Conventions
@@ -34,3 +36,4 @@ A research, architecture, and content project on **self-healing software**: syst
 - [x] Phase 5 — Video — 8 narrated episodes (neural voice + slide design system, decisions 006–007)
 - [x] Phase 6 — Verification loop — 24/24 audit PASS, axioms A1–A12 verified, URLs live
 - [x] Phase 7 — Four audience articles (ELI5 / entry-level / professional / C-level), consistency-checked
+- [x] Phase 8 — Distribution pack: 4 vertical shorts, YouTube thumbnails + metadata, platform copy, dev.to exports, credential-gated automation (`publish/`)
