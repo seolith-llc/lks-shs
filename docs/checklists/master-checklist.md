@@ -59,6 +59,14 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ dev.to exports: 8 articles with front-matter, canonical URLs to GitHub, links absolutized (`publish/articles/devto/`)
 - [x] ✓ Automation stubs (credential-gated, dry-run by default): `bluesky_post.py` (6 skeets parsed, dry-run OK), `devto_publish.py` (payload dry-run OK) — X/IG/TikTok/YouTube documented as manual (API tiers/review)
 
+## Phase 9 — Model & interactive page (`#Step009`, 2026-11-13)
+- [x] ✓ `docs/architecture/use-case-catalog.md` — 38 use cases (26 ✅ shipped / 3 🪝 hook-ready / 4 🚧 planned / 5 💭 proposed), every ✅ row cited to function+file (line-verified 2026-11-13)
+- [x] ✓ `docs/architecture/state-workflow-model.md` — two coupled state machines (patient + healer) as mermaid stateDiagrams + state tables with code anchors, the 4 stateful subtleties, full timing model, event-log schema, workflow↔use-case↔page map
+- [x] ✓ `docs/animations/pulse-interactive.html` — single self-contained file (no network, no deps): animated PULSE ring, woundable simulator (crash/hang/leak/errors/crashloop), live state machine, escalation ladder, healing-log console
+- [x] ✓ Interactive page functionally verified in-browser: hang→HUNG→heal, leak→heal, errors→heal, crashloop→ESCALATED→reset→heal (4 real bugs found & fixed: hidden-tab clock teleport, instant-probe misrace letting ERRORING beat HUNG, transition-guard blocking re-detection, drill not recurring)
+- [x] ✓ Visual acceptance: 3 rounds (viewport truncation, broken full-page stitch, then tall-viewport single frame) → **PASS**; evidence `docs/animations/pulse-interactive-evidence.png`
+- [x] ✓ Wired in: series overview "Try it live" section, README layout + phase list
+
 ## Continuous
 - [x] ✓ Prompt history every turn + INDEX current (protocol: `docs/prompt-histories/README.md`)
 - [x] ✓ Git milestone commits
@@ -81,3 +89,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Phase 6 audit pass 1 | PASS | 24/24 after analysis (1 mermaid-lint false positive diagnosed: substring vs keyword `end`); prototype 5/5 re-PASS (demo-evidence.log refreshed); 8/8 external URLs live; axioms A1–A12 verified with evidence |
 | 2026-11-09 | Phase 7 articles | PASS | 4/4 written (~700 words each, four altitudes); scripted fact-consistency PASS on 5 shared claims; article link audit PASS |
 | 2026-11-09 | Phase 8 shorts + thumbs | PASS | 4/4 vertical shorts 1080×1920 (46–54 s); visual-judge PASS on title + stat frames from final MP4s; 8/8 thumbnails 1280×720, thumb-02 PASS; dev.to exports 8/8 + both automation stubs dry-run OK |
+| 2026-11-13 | Phase 9 interactive page | PASS | In-browser functional sweep (hang/leak/errors/crashloop→ESCALATED→reset) via local server + browser automation; 4 bugs found & fixed (clock teleport, probe race, transition guard, non-recurring drill); visual-judge PASS on tall-viewport capture (r1–r2 failed on capture mechanics only) |

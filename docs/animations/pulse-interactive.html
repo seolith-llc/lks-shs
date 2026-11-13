@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PULSE — the self-healing loop, live</title>
+<style>
+  :root{
+    --bg:#0B2545; --bg2:#071A31; --card:#0A1F3D; --stroke:#3D5A80;
+    --accent:#FFD166; --white:#E0FBFC; --muted:#8DA9C4;
+    --P:#2EC4B6; --U:#FF9F1C; --L:#E71D36; --S:#4CC9F0; --E:#9EF01A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:radial-gradient(1100px 600px at 88% -8%, rgba(255,209,102,.10), transparent 60%),
+               radial-gradient(900px 500px at 4% 108%, rgba(76,201,240,.10), transparent 60%),
+               linear-gradient(135deg,#16396A 0%, #0B2545 55%, #071A31 100%);
+    color:var(--white);
+    font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    min-height:100vh; padding:28px clamp(14px,4vw,56px) 60px;
+  }
+  a{color:var(--accent);text-decoration:none}
+  header{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin-bottom:6px}
+  h1{font-size:clamp(30px,4.6vw,52px);letter-spacing:.28em;font-weight:800}
+  header .sub{color:var(--muted);font-size:15px}
+  .tagline{color:var(--muted);margin:2px 0 22px;font-size:15px;max-width:80ch}
+  .tagline b{color:var(--accent);font-weight:600}
+  .wrap{display:grid;grid-template-columns:minmax(320px,5fr) minmax(300px,4fr);gap:22px;align-items:start}
+  @media(max-width:900px){.wrap{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px 20px}
+  .card h2{font-size:13px;letter-spacing:.18em;color:var(--muted);font-weight:700;margin-bottom:12px;text-transform:uppercase}
+  .row{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:22px}
+
+  /* ---------- PULSE ring ---------- */
+  .ringbox{position:relative;display:flex;justify-content:center;padding:6px 0 2px}
+  .ring{width:min(430px,86vw);height:auto}
+  .ring text{font-family:inherit}
+  .node circle{transition:opacity .25s, stroke-width .25s}
+  .node.dim circle{opacity:.34}
+  .node.lit circle{opacity:1;stroke-width:5;filter:drop-shadow(0 0 14px currentColor)}
+  .node.lit text{font-weight:700}
+  .stage-note{color:var(--muted);text-align:center;font-size:13.5px;margin-top:6px;min-height:20px}
+  .stage-note b{color:var(--accent)}
+
+  /* ---------- simulator ---------- */
+  .pt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .badge{font-size:12px;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:999px;border:1px solid var(--stroke);color:var(--muted)}
+  .badge.HEALTHY{color:#071A31;background:var(--E);border-color:var(--E)}
+  .badge.DEGRADED{color:#071A31;background:var(--U);border-color:var(--U)}
+  .badge.CRASHED,.badge.HUNG,.badge.LEAKING,.badge.ERRORING{color:#fff;background:var(--L);border-color:var(--L)}
+  .badge.ESCALATED{color:#071A31;background:var(--accent);border-color:var(--accent)}
+  .meter{margin:10px 0}
+  .meter label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);margin-bottom:4px}
+  .bar{height:10px;border-radius:6px;background:#071A31;border:1px solid var(--stroke);overflow:hidden}
+  .bar i{display:block;height:100%;width:0%;transition:width .18s linear}
+  #hbFill{background:var(--P)} #memFill{background:var(--U)} #errFill{background:var(--L)}
+  .lamp{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--muted)}
+  .lamp i{width:10px;height:10px;border-radius:50%;background:#22406B;display:inline-block}
+  .lamp.on i{background:var(--E);box-shadow:0 0 10px var(--E)}
+  .lamp.off i{background:var(--L)}
+  .wounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:9px;margin-top:14px}
+  button{font:inherit;font-weight:600;letter-spacing:.04em;color:var(--white);
+    background:#12305A;border:1px solid var(--stroke);border-radius:11px;padding:10px 8px;cursor:pointer;transition:.15s}
+  button:hover:not(:disabled){transform:translateY(-1px);border-color:var(--accent)}
+  button:disabled{opacity:.35;cursor:not-allowed}
+  button.wound{border-color:#7A2E3B}
+  button.wound:hover:not(:disabled){border-color:var(--L)}
+  #btnCrash{color:#FF8A9B} #btnHang{color:#FFB86E} #btnLeak{color:#FFD166} #btnErr{color:#FF8A9B}
+  #btnClear{border-color:var(--P);color:var(--P)}
+  #btnEscalate{border-color:var(--accent);color:var(--accent)}
+  #btnReset{border-color:var(--S);color:var(--S);grid-column:1/-1}
+
+  .healer .stat{display:flex;justify-content:space-between;font-size:13.5px;padding:3px 0;color:var(--muted)}
+  .healer .stat b{color:var(--white);font-variant-numeric:tabular-nums}
+  .restartmeter{display:flex;gap:6px;margin:10px 0 4px}
+  .restartmeter i{flex:1;height:14px;border-radius:5px;background:#071A31;border:1px solid var(--stroke)}
+  .restartmeter i.used{background:var(--L);border-color:var(--L);box-shadow:0 0 8px rgba(231,29,54,.5)}
+  .escalate{display:none;margin-top:12px;padding:12px;border-radius:11px;border:1px solid var(--accent);
+    background:rgba(255,209,102,.08);font-size:14px}
+  .escalate.show{display:block;animation:pulse 1.2s ease-in-out infinite}
+  .escalate b{color:var(--accent)}
+  @keyframes pulse{50%{box-shadow:0 0 22px rgba(255,209,102,.25)}}
+
+  /* ---------- console ---------- */
+  .console{font:12.5px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    background:#071A31;border:1px solid var(--stroke);border-radius:11px;padding:12px 14px;
+    height:238px;overflow-y:auto;scrollbar-width:thin}
+  .console .t{color:#5C7799}
+  .console .P{color:var(--P)} .console .U{color:var(--U)} .console .L{color:#FF8A9B}
+  .console .S{color:var(--S)} .console .E{color:var(--E)} .console .ok{color:var(--E)} .console .warn{color:var(--accent)}
+
+  /* ---------- state diagram ---------- */
+  .states svg text{font-family:inherit}
+  .st rect{transition:opacity .2s}
+  .st{opacity:.30}
+  .st.cur{opacity:1}
+  .st.cur rect{stroke-width:4;filter:drop-shadow(0 0 10px rgba(224,251,252,.25))}
+
+  /* ---------- ladder ---------- */
+  .ladder{display:grid;gap:8px}
+  .rung{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--stroke);
+    border-radius:10px;padding:8px 14px;font-size:13.5px;color:var(--muted);transition:.25s}
+  .rung b{color:var(--white);font-weight:600}
+  .rung.on{border-color:var(--accent);background:rgba(255,209,102,.07)}
+  .rung.on b{color:var(--accent)}
+  footer{margin-top:30px;color:var(--muted);font-size:13px;text-align:center}
+  footer code{color:var(--S)}
+  .controls{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+  .controls .spd{color:var(--muted);font-size:12.5px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PULSE</h1>
+  <span class="sub">the self-healing loop — live &amp; woundable</span>
+</header>
+<p class="tagline">
+  This page is a faithful, sped-up simulation of the repo's real supervisor
+  (<code>prototypes/pulse-app/supervisor.py</code>): same states, same thresholds, same
+  MaxR/MaxT escalation, same log lines. <b>Wound the service below and watch the loop heal it.</b>
+  Nothing here talks to the network — it is one self-contained file.
+</p>
+
+<div class="row">
+  <!-- ================= PULSE RING ================= -->
+  <div class="card" style="flex:1.2;min-width:300px">
+    <h2>The loop</h2>
+    <div class="ringbox">
+      <svg class="ring" viewBox="0 0 440 400" aria-label="PULSE loop animation">
+        <g id="ringArrows" stroke="#8DA9C4" stroke-width="2" fill="none" opacity=".8">
+          <path d="M 242,74 A 150,150 0 0 1 337,132" marker-end="url(#arr)"/>
+          <path d="M 360,187 A 150,150 0 0 1 342,291" marker-end="url(#arr)"/>
+          <path d="M 294,349 A 150,150 0 0 1 176,355" marker-end="url(#arr)"/>
+          <path d="M 116,300 A 150,150 0 0 1 92,199" marker-end="url(#arr)"/>
+          <path d="M 114,140 A 150,150 0 0 1 198,74" marker-end="url(#arr)"/>
+        </g>
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#8DA9C4"/>
+          </marker>
+        </defs>
+        <g class="node" id="nP" data-k="P"><circle cx="220" cy="72" r="40" fill="#2EC4B6"/><text x="220" y="82" text-anchor="middle" font-size="30" font-weight="700" fill="#071A31">P</text></g>
+        <g class="node" id="nU" data-k="U"><circle cx="352" cy="168" r="40" fill="#FF9F1C"/><text x="352" y="178" text-anchor="middle" font-size="30" font-weight="700" fill="#071A31">U</text></g>
+        <g class="node" id="nL" data-k="L"><circle cx="300" cy="330" r="40" fill="#E71D36"/><text x="300" y="340" text-anchor="middle" font-size="30" font-weight="700" fill="#fff">L</text></g>
+        <g class="node" id="nS" data-k="S"><circle cx="140" cy="330" r="40" fill="#4CC9F0"/><text x="140" y="340" text-anchor="middle" font-size="30" font-weight="700" fill="#071A31">S</text></g>
+        <g class="node" id="nE" data-k="E"><circle cx="88"  cy="168" r="40" fill="#9EF01A"/><text x="88" y="178" text-anchor="middle" font-size="30" font-weight="700" fill="#071A31">E</text></g>
+        <text x="220" y="205" text-anchor="middle" font-size="26" font-weight="800" fill="#E0FBFC" letter-spacing="6">PULSE</text>
+        <text x="220" y="228" text-anchor="middle" font-size="11.5" fill="#8DA9C4">verification gate: S → E</text>
+        <g id="gateGlow"><rect x="150" y="262" width="140" height="20" rx="10" fill="#FFD166" opacity=".22"/>
+          <text x="220" y="276" text-anchor="middle" font-size="10.5" fill="#FFD166">non-AI oracle required</text></g>
+        <circle id="traveler" r="6" fill="#FFD166" style="filter:drop-shadow(0 0 8px #FFD166)">
+          <animateMotion dur="5s" repeatCount="indefinite" rotate="auto"
+            path="M 220,72 A 150,150 0 1 1 219.9,72"/>
+        </circle>
+      </svg>
+    </div>
+    <div class="stage-note" id="stageNote">Perceive — sampling heartbeat, /health, golden request…</div>
+  </div>
+
+  <!-- ================= PATIENT ================= -->
+  <div class="card" style="flex:1;min-width:290px">
+    <h2>The patient — demo service</h2>
+    <div class="pt-head">
+      <span style="font-size:15px;font-weight:700">pulse-app service</span>
+      <span class="badge HEALTHY" id="svcBadge">HEALTHY</span>
+    </div>
+    <div class="meter"><label><span>heartbeat (dead man's switch)</span><span id="hbTxt">0.0s / 3.0s</span></label>
+      <div class="bar"><i id="hbFill" style="width:100%"></i></div></div>
+    <div class="meter"><label><span>memory gauge (ballast)</span><span id="memTxt">0 / 40 MB</span></label>
+      <div class="bar"><i id="memFill" style="width:0%"></i></div></div>
+    <div class="meter"><label><span>golden-probe error rate</span><span id="errTxt">0/6</span></label>
+      <div class="bar"><i id="errFill" style="width:0%"></i></div></div>
+    <div class="lamp" id="goldenLamp"><i></i><span>golden request: PULSE-OK</span></div>
+    <div class="wounds">
+      <button class="wound" id="btnCrash">💀 crash</button>
+      <button class="wound" id="btnHang">🧊 hang</button>
+      <button class="wound" id="btnLeak">🎈 leak</button>
+      <button class="wound" id="btnErr">🎲 errors</button>
+      <button id="btnClear">✓ clear soft faults</button>
+      <button id="btnEscalate">🌀 force crashloop</button>
+    </div>
+    <div class="controls">
+      <button id="btnSpeed" style="padding:6px 14px;font-size:13px">speed ×4</button>
+      <span class="spd" id="simClock">t = 0.0s</span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- ================= HEALER ================= -->
+  <div class="card healer">
+    <h2>The healer — supervisor (PULSE every 0.3&nbsp;s)</h2>
+    <div class="stat"><span>supervisor state</span><b id="supState">PERCEIVING</b></div>
+    <div class="stat"><span>classification</span><b id="lastClass">HEALTHY</b></div>
+    <div class="stat"><span>localized</span><b id="lastLoc">—</b></div>
+    <div class="stat"><span>heals / escalations</span><b id="healCount">0 / 0</b></div>
+    <div class="stat"><span>last MTTR</span><b id="lastMtrr">—</b></div>
+    <div class="stat"><span>backoff (1→2→4→8 s cap)</span><b id="backoffTxt">—</b></div>
+    <div class="stat"><span>restarts in 30 s window (MaxR=3)</span><b id="winTxt">0</b></div>
+    <div class="restartmeter" id="restartMeter"><i></i><i></i><i></i></div>
+    <div class="lamp" id="verifyLamp" style="margin-top:6px"><i></i><span>verification gate: awaiting heal…</span></div>
+    <div class="escalate" id="escBox">
+      <b>ESCALATED — restart intensity ≥ MaxR (3 in 30 s).</b><br>
+      The healer refuses to thrash: rescheduling halted, human paged (OTP MaxR/MaxT, axiom A3).
+      <button id="btnReset">🧑‍🔧 human acknowledges — reset supervisor</button>
+    </div>
+    <h2 style="margin-top:18px">healing log</h2>
+    <div class="console" id="console"></div>
+  </div>
+
+  <!-- ================= STATES + LADDER ================= -->
+  <div>
+    <div class="card states">
+      <h2>Patient state machine (live)</h2>
+      <svg viewBox="0 0 520 300" style="width:100%">
+        <g stroke="#3D5A80" stroke-width="1.6" fill="none" marker-end="url(#a2)">
+          <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3D5A80"/></marker></defs>
+          <path d="M 130,60  C 190,60 200,86 226,104"/>
+          <path d="M 330,60  C 400,70 420,110 424,150"/>
+          <path d="M 260,146 C 300,170 330,180 360,196" />
+          <path d="M 96,146  C 70,180 70,210 96,232"/>
+          <path d="M 200,258 C 260,278 330,272 380,252"/>
+        </g>
+        <g font-size="14" font-weight="600" text-anchor="middle">
+          <g class="st" id="stHEALTHY"><rect x="70" y="34" width="120" height="40" rx="10" fill="#9EF01A"/><text x="130" y="59" fill="#071A31">HEALTHY</text></g>
+          <g class="st" id="stDEGRADED"><rect x="270" y="34" width="130" height="40" rx="10" fill="#FF9F1C"/><text x="335" y="59" fill="#071A31">DEGRADED</text></g>
+          <g class="st" id="stHUNG"><rect x="180" y="112" width="100" height="40" rx="10" fill="#E71D36"/><text x="230" y="137" fill="#fff">HUNG</text></g>
+          <g class="st" id="stERRORING"><rect x="380" y="160" width="120" height="40" rx="10" fill="#E71D36"/><text x="440" y="185" fill="#fff">ERRORING</text></g>
+          <g class="st" id="stLEAKING"><rect x="255" y="222" width="110" height="40" rx="10" fill="#E71D36"/><text x="310" y="247" fill="#fff">LEAKING</text></g>
+          <g class="st" id="stCRASHED"><rect x="70" y="222" width="110" height="40" rx="10" fill="#E71D36"/><text x="125" y="247" fill="#fff">CRASHED</text></g>
+        </g>
+        <text x="260" y="292" text-anchor="middle" font-size="11.5" fill="#8DA9C4">any FAULTED state → Solve (kill + restart w/ backoff) → verification gate</text>
+      </svg>
+    </div>
+    <div class="card" style="margin-top:22px">
+      <h2>Escalation ladder (live)</h2>
+      <div class="ladder">
+        <div class="rung" id="rg3"><span><b>L3 restart</b> with backoff</span><span id="rg3c">0×</span></div>
+        <div class="rung" id="rg6"><span><b>L6 rollback</b> of bad change</span><span>design ref · D3</span></div>
+        <div class="rung" id="rg7"><span><b>L7 AI triage → human-gated PR</b></span><span>design ref · D4</span></div>
+        <div class="rung" id="rgH"><span><b>Human on-call</b> (the L2 gate)</span><span id="rgHc">idle</span></div>
+      </div>
+      <div class="stage-note" style="margin-top:10px;text-align:left">Heal at the lowest sufficient layer; escalate only on repeat. L6/L7 are designed (decision records) but not part of this simulation — the shipped prototype stops at L3 + human escalation, exactly like the real demo.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Mirrors <code>prototypes/pulse-app/supervisor.py</code> · CONFIG: tick 0.3s · heartbeat 0.5s/3.0s · leak 8MB/probe @40MB · errors 50% @3/6 · backoff 1,2,4,8s · MaxR 3/30s ·
+  everything sourced at <a href="https://github.com/seolith-llc/lks-shs">github.com/seolith-llc/lks-shs</a> · state model: <a href="../architecture/state-workflow-model.md">docs/architecture/state-workflow-model.md</a>
+</footer>
+
+<script>
+"use strict";
+/* ===================== faithful mini-supervisor (mirrors supervisor.py) ===================== */
+const CFG = { tick:300, hbPeriod:500, hbTimeout:3000, goldenTimeout:2000,
+  chunkMB:8, leakLimit:40, errWindow:6, errThreshold:0.5, errFaultRate:0.5,
+  backoff:[1000,2000,4000,8000], maxR:3, window:30000, verifyBudget:10000 };
+const LOC = { CRASHED:"service process (runtime layer L3)", HUNG:"event loop / heartbeat thread (L3)",
+  LEAKING:"request-handler allocation path (app logic)", ERRORING:"recent change or dependency (L6/L4)" };
+
+const S = {
+  t:0, speed:4, running:true,
+  svc:{ alive:true, faults:new Set(), ballast:0, lastBeat:0, bootedAt:0, goldenOk:true },
+  sup:{ state:"PERCEIVING", lastClass:"HEALTHY", loc:"—", restarts:[], window:new Array(CFG.errWindow).fill(true),
+        backoffUntil:0, verifyDeadline:0, solves:0, heals:0, escalations:0, lastMttr:null, woundedAt:null,
+        probeReady:0, pending:"" },
+  nextHb:0, nextTick:0, stage:"P", pendingEscalate:false, drill:false,
+};
+
+const $ = id => document.getElementById(id);
+const fmt = ms => (ms/1000).toFixed(1);
+const now = () => S.t;
+
+function log(cls, msg){
+  const el = $("console");
+  const line = document.createElement("div");
+  line.innerHTML = `<span class="t">[+${fmt(S.t)}s]</span> <span class="${cls}">${msg}</span>`;
+  el.prepend(line);
+  while(el.childElementCount > 160) el.lastChild.remove();
+}
+function ring(k, note){
+  S.stage = k;
+  for(const n of document.querySelectorAll(".node")) n.classList.toggle("lit", n.dataset.k===k);
+  document.querySelectorAll(".node").forEach(n=>n.classList.toggle("dim", n.dataset.k!==k));
+  $("stageNote").innerHTML = note;
+}
+function setState(st){ S.sup.state = st; $("supState").textContent = st; }
+
+/* ---------- patient physics ---------- */
+function svcTick(){
+  const s = S.svc;
+  if(!s.alive) return;
+  if(S.t >= S.nextHb){
+    if(!s.faults.has("hang")) s.lastBeat = S.t;         // heartbeat_loop writes unless 'hang'
+    S.nextHb = S.t + CFG.hbPeriod;
+  }
+}
+function hbAge(){ return S.svc.alive ? now()-S.svc.lastBeat : now()-S.svc.lastBeat; }
+function golden(){
+  const s = S.svc;
+  if(!s.alive) return false;
+  if(s.faults.has("hang")) return false;                 // handler stalls → timeout
+  if(s.faults.has("leak") && s.ballast < 512) s.ballast += CFG.chunkMB;  // grows per request
+  const ok = !(s.faults.has("errors") && Math.random() < CFG.errFaultRate);
+  s.goldenOk = ok;
+  return ok;
+}
+
+/* ---------- supervisor = perceive/understand/localize/solve/verify ---------- */
+function perceive(){
+  const s = S.svc;
+  let ok = s.goldenOk;
+  if(now() >= S.sup.probeReady){                        // a probe is only pushed when it completes:
+    ok = golden();                                       // under hang it blocks ~2s (timeout), like the real
+    if(s.alive && s.faults.has("hang")) S.sup.probeReady = now()+CFG.goldenTimeout;
+    S.sup.window.push(ok); S.sup.window.shift();
+  }                                                      // blocking supervisor — so HUNG wins the race
+  return { alive:s.alive, hbAge:hbAge(), golden:ok, ballast:s.ballast,
+           fails:S.sup.window.filter(x=>!x).length };
+}
+function understand(p){
+  if(!p.alive) return "CRASHED";
+  if(p.hbAge > CFG.hbTimeout) return "HUNG";
+  if(p.ballast > CFG.leakLimit) return "LEAKING";
+  if(S.sup.window.length===CFG.errWindow && p.fails/CFG.errWindow >= CFG.errThreshold) return "ERRORING";
+  return "HEALTHY";
+}
+function solve(fc){
+  S.sup.restarts = S.sup.restarts.filter(t => now()-t < CFG.window);
+  if(S.sup.restarts.length >= CFG.maxR){ escalate(fc); return; }
+  const n = S.sup.restarts.length;
+  const back = CFG.backoff[Math.min(n, CFG.backoff.length-1)];
+  log("L", `PULSE L: ${LOC[fc]}`);
+  log("S", `PULSE S: kill + RESTART #${n+1} (backoff ${fmt(back)}s, capped 8s — kubelet-style damping)`);
+  S.svc.alive = false;
+  S.sup.restarts.push(now());
+  S.sup.backoffUntil = now() + back;
+  S.sup.solves++;
+  setState("RESTARTING"); ring("S","Solve — kill + restart with capped backoff");
+  $("backoffTxt").textContent = fmt(back)+"s";
+}
+function escalate(fc){
+  S.sup.escalations++; setState("ESCALATED");
+  log("warn", `PULSE S: ESCALATE — restart intensity ${S.sup.restarts.length} in 30s exceeds MaxR=${CFG.maxR} (OTP MaxR/MaxT). Human required.`);
+  $("escBox").classList.add("show"); $("rgH").classList.add("on"); $("rgHc").textContent="PAGED";
+  ring("E","Evolve — escalation is the correct heal: the healer refuses to thrash (axiom A3)");
+  S.pendingEscalate = true;
+}
+function verifyPass(){
+  if(hbAge() > CFG.hbTimeout) return false;
+  return golden();
+}
+function healedEvent(fc){
+  S.sup.heals++;
+  const mttr = S.sup.woundedAt!=null ? now()-S.sup.woundedAt : null;
+  S.sup.lastMttr = mttr; S.sup.woundedAt = null;
+  log("E", `PULSE E: verification gate → HEALED (heartbeat fresh, golden=PULSE-OK) mttr=${mttr!=null?fmt(mttr*1)+"s":"—"}`
+      + (fc==="LEAKING" ? ` | mitigated, not cured — code fix needs an L2 human-reviewed PR ("restart is not repair")` : ""));
+  log("ok", `triage → ${ (fc==="HUNG"?"event loop stalled (0.85)":fc==="CRASHED"?"process exit/killed (0.90)":fc==="LEAKING"?"unbounded retention (0.90)":"deployment regression (0.80)")} · gate: fixes need L2 human review`);
+}
+function respawn(){
+  const s = S.svc;
+  s.alive = true; s.faults.clear(); s.ballast = 0; s.bootedAt = now();
+  s.lastBeat = now(); S.nextHb = now()+CFG.hbPeriod;
+  S.sup.window = new Array(CFG.errWindow).fill(true);
+}
+
+/* ---------- supervisor tick ---------- */
+function supTick(){
+  if(S.sup.state==="ESCALATED") return;
+  if(S.sup.state==="RESTARTING"){
+    if(now() >= S.sup.backoffUntil){
+      respawn(); setState("VERIFYING"); S.sup.verifyDeadline = now()+CFG.verifyBudget;
+      ring("S","Verify — the gate: fresh heartbeat AND golden PULSE-OK…");
+    }
+    return;
+  }
+  if(S.sup.state==="VERIFYING"){
+    if(verifyPass()){
+      healedEvent(S.sup.lastClass); setState("PERCEIVING");
+      S.sup.lastClass = "HEALTHY"; S.sup.loc = "—";   // a passed gate asserts health (re-arms detection)
+      ring("P","Perceive — sampling heartbeat, /health, golden request…");
+      if(S.drill){                                // deterministic fault: recurs right after each heal
+        S.svc.alive = false;
+        log("warn","drill: the deterministic fault ships again tomorrow — crash recurs");
+      }
+    }
+    else if(now() > S.sup.verifyDeadline){
+      log("warn","PULSE E: verification gate → FAILED TO HEAL (10s budget) — re-entering the loop");
+      setState("PERCEIVING");
+    }
+    return;
+  }
+  /* PERCEIVING */
+  const p = perceive();
+  const fc = understand(p);
+  if(fc !== S.sup.lastClass && fc!=="HEALTHY"){
+    S.sup.lastClass = fc; S.sup.loc = LOC[fc];
+    if(S.sup.woundedAt==null) S.sup.woundedAt = now();
+    log("P", `PULSE P: alive=${p.alive} hb_age=${fmt(p.hbAge)}s golden=${p.golden} ballast=${p.ballast}MB`);
+    log("U", `PULSE U: classified ${fc} | PULSE L: ${LOC[fc]}`);
+    ring("U","Understand + Localize — classify the wound, name the component…");
+    solve(fc);
+  } else if(fc==="HEALTHY" && S.sup.lastClass!=="HEALTHY"){
+    S.sup.lastClass = "HEALTHY"; S.sup.loc = "—";
+  }
+}
+
+/* ---------- UI paint ---------- */
+function paint(){
+  const s=S.svc, u=S.sup;
+  const age = Math.min(hbAge(), CFG.hbTimeout);
+  $("hbFill").style.width = (100*(1-age/CFG.hbTimeout)).toFixed(1)+"%";
+  $("hbTxt").textContent = `${fmt(Math.max(0,age))}s / 3.0s`;
+  $("memFill").style.width = Math.min(100, 100*s.ballast/CFG.leakLimit)+"%";
+  $("memTxt").textContent = `${s.ballast} / ${CFG.leakLimit} MB`;
+  const fails = u.window.filter(x=>!x).length;
+  $("errFill").style.width = (100*fails/CFG.errWindow)+"%";
+  $("errTxt").textContent = `${fails}/${CFG.errWindow}`;
+  const gl = $("goldenLamp");
+  gl.className = "lamp " + (s.alive && !s.faults.has("hang") ? (s.goldenOk?"on":"off") : "off");
+  gl.querySelector("span").textContent = s.alive ?
+     (s.faults.has("hang") ? "golden request: TIMEOUT (stalled)" : (s.goldenOk?"golden request: PULSE-OK":"golden request: HTTP 500")) :
+     "golden request: connection refused";
+  let badge = "HEALTHY";
+  if(u.state==="ESCALATED") badge="ESCALATED";
+  else if(!s.alive) badge="CRASHED";
+  else if(u.lastClass!=="HEALTHY" && u.lastClass in LOC) badge=u.lastClass;
+  else if(s.faults.size) badge="DEGRADED";
+  const b=$("svcBadge"); b.textContent=badge; b.className="badge "+badge;
+  $("lastClass").textContent = u.lastClass; $("lastLoc").textContent = u.loc || "—";
+  $("healCount").textContent = `${u.heals} / ${u.escalations}`;
+  $("lastMtrr").textContent = u.lastMttr!=null ? fmt(u.lastMttr)+"s" : "—";
+  $("winTxt").textContent = `${u.restarts.filter(t=>now()-t<CFG.window).length}`;
+  const used = Math.min(u.restarts.length,3);
+  [...$("restartMeter").children].forEach((el,i)=>el.classList.toggle("used", i<used));
+  const vl=$("verifyLamp");
+  vl.className="lamp "+(u.state==="VERIFYING"||u.state==="PERCEIVING" ? (u.state==="VERIFYING"?"on":"on") : "off");
+  vl.querySelector("span").textContent = u.state==="VERIFYING" ? "verification gate: checking heartbeat + golden…" :
+      u.state==="ESCALATED" ? "verification gate: halted — human required" : "verification gate: armed";
+  for(const id of ["HEALTHY","DEGRADED","HUNG","LEAKING","ERRORING","CRASHED"]){
+    const el=$("st"+id); el.classList.toggle("cur", badge===id);
+  }
+  $("rg3c").textContent = u.solves+"×";
+  $("rg3").classList.toggle("on", u.state==="RESTARTING" || u.solves>0);
+  $("simClock").textContent = `t = ${fmt(S.t)}s${S.speed>1?` (×${S.speed})`:""}`;
+}
+
+/* ---------- clock (catch-up: virtual time derives from real elapsed time,
+   so browser timer-throttling of hidden pages can never stall the loop) ---------- */
+let lastReal = performance.now();
+setInterval(()=>{
+  if(!S.running) return;
+  const nowReal = performance.now();
+  let step = (nowReal - lastReal) * S.speed;      // real delta × speed = virtual delta
+  lastReal = nowReal;
+  step = Math.min(step, 250);                     // throttled/hidden tab → sim slows gracefully, never teleports
+  const end = S.t + step;
+  while(S.t < end){
+    S.t = Math.min(S.t + 25, end);
+    svcTick();
+    if(S.t >= S.nextTick){ S.nextTick = S.t + CFG.tick; supTick(); }
+  }
+  paint();
+}, 50);
+
+/* ---------- controls ---------- */
+function wound(name){
+  if(S.sup.state==="ESCALATED" || !S.svc.alive) return;
+  S.svc.faults.add(name);
+  if(S.sup.woundedAt==null) S.sup.woundedAt = now();   // MTTR measured from injection, like run_scenario
+  log("warn", `operator: POST /inject/${name} → fault active`);
+}
+$("btnCrash").onclick = ()=>{ if(!S.svc.alive||S.sup.state==="ESCALATED")return;
+  if(S.sup.woundedAt==null) S.sup.woundedAt = now();
+  log("warn","operator: POST /inject/crash → service exiting (137)"); S.svc.alive=false; };
+$("btnHang").onclick = ()=>wound("hang");
+$("btnLeak").onclick = ()=>wound("leak");
+$("btnErr").onclick  = ()=>wound("errors");
+$("btnClear").onclick = ()=>{ S.svc.faults.delete("leak"); S.svc.faults.delete("errors");
+  log("ok","operator: POST /clear → soft faults cleared"); };
+$("btnEscalate").onclick = ()=>{
+  if(S.sup.state==="ESCALATED") return;
+  log("warn","operator: crashloop drill — deterministic crash incoming (recurs until escalation)");
+  S.drill = true;
+  S.svc.alive=false;                                   // detection must come from the loop, not from us
+  if(S.sup.woundedAt==null) S.sup.woundedAt=now();
+  /* pre-seed the window so escalation lands after 3 rapid restarts */
+  S.sup.restarts = S.sup.restarts.filter(t=>now()-t<CFG.window);
+  if(S.sup.restarts.length<2){ S.sup.restarts.push(now()-2000, now()-1000); }
+};
+$("btnReset").onclick = ()=>{
+  S.sup = { state:"PERCEIVING", lastClass:"HEALTHY", loc:"—", restarts:[], window:new Array(CFG.errWindow).fill(true),
+    backoffUntil:0, verifyDeadline:0, solves:0, heals:0, escalations:0, lastMttr:null, woundedAt:null,
+    probeReady:0 };
+  S.pendingEscalate=false; S.drill=false; $("escBox").classList.remove("show"); $("rgH").classList.remove("on"); $("rgHc").textContent="idle";
+  log("ok","human acknowledged escalation — supervisor reset, rescheduling resumed");
+  ring("P","Perceive — sampling heartbeat, /health, golden request…");
+};
+$("btnSpeed").onclick = ()=>{ S.speed = S.speed===4?1:4; $("btnSpeed").textContent = S.speed===4?"speed ×4":"speed ×1"; };
+
+log("ok","supervisor up — CONFIG: tick 0.3s · hb 0.5s/3.0s · leak 8MB/probe @40MB · backoff 1,2,4,8s · MaxR 3/30s");
+log("ok","service HEALTHY (fresh heartbeat + golden PULSE-OK) — wound it ↓");
+ring("P","Perceive — sampling heartbeat, /health, golden request…");
+paint();
+</script>
+</body>
+</html>

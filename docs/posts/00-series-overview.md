@@ -23,6 +23,10 @@
 
 ![The PULSE loop](animations/pulse-loop.svg)
 
+## Try it live (no install)
+
+Open [`docs/animations/pulse-interactive.html`](animations/pulse-interactive.html) — a single self-contained file that simulates the real supervisor faithfully (same states, thresholds, MaxR/MaxT escalation, and log lines). **Wound the service with the buttons and watch the loop heal it.** The model behind it: [`state-workflow-model.md`](../architecture/state-workflow-model.md) · every behavior maps to a shipped use case: [`use-case-catalog.md`](../architecture/use-case-catalog.md).
+
 ## How this series was built (and why you can trust it)
 
 - Every claim traces to a **numbered, URL-verified source** in the research dossiers: [`docs/research/`](../research/README.md) — 180 sources, all fetched 2026-11-09, unverifiable claims marked `[UNVERIFIED]` and excluded.
