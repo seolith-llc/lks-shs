@@ -72,7 +72,7 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ Site built: index + 8 posts + 4 articles + interactive simulator + SVGs; mermaid via CDN w/ fallback; links absolutized/mapped
 - [x] ✓ Local verification: all routes 200; mermaid renders as SVG (browser-checked); `zcode-site check` → **live/200**
 - [x] ✓ Visual judge round 1 caught a real defect (markdown-bold inside mermaid labels) → fixed via markdown-string syntax in post 04 (also fixes GitHub rendering); other findings were capture artifacts (viewport-cap truncation)
-- [ ] ◐ Visual judge round 2 (fixed diagram) — verdict pending, gates deploy
+- [x] ✓ Visual judge round 2 (fixed diagram): **PASS** — all five labels clean, styled flowchart verified at zoom (crops inspected); every quality gate now green
 - [ ] ☐ **Deploy to public ZCode Sites URL — awaiting explicit user confirmation** (stage ready in `.zcode-site/stage/`)
 - [ ] ☐ dev.to mirror — awaiting API key (automation → unlisted drafts) or manual import of `publish/articles/devto/`
 
@@ -99,3 +99,4 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 | 2026-11-09 | Phase 7 articles | PASS | 4/4 written (~700 words each, four altitudes); scripted fact-consistency PASS on 5 shared claims; article link audit PASS |
 | 2026-11-09 | Phase 8 shorts + thumbs | PASS | 4/4 vertical shorts 1080×1920 (46–54 s); visual-judge PASS on title + stat frames from final MP4s; 8/8 thumbnails 1280×720, thumb-02 PASS; dev.to exports 8/8 + both automation stubs dry-run OK |
 | 2026-11-13 | Phase 9 interactive page | PASS | In-browser functional sweep (hang/leak/errors/crashloop→ESCALATED→reset) via local server + browser automation; 4 bugs found & fixed (clock teleport, probe race, transition guard, non-recurring drill); visual-judge PASS on tall-viewport capture (r1–r2 failed on capture mechanics only) |
+| 2026-11-22 | Publication site | PASS | All routes 200; `zcode-site check` live/200; judge r1 FAIL → real mermaid-label bug fixed (markdown-string syntax); judge r2 **PASS** at zoom on all five labels + gate diamond. Deploy held for explicit user go (stage in `.zcode-site/stage/`) |
