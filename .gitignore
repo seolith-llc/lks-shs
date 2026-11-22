@@ -28,3 +28,9 @@ tmp/
 
 # video TTS venv (edge-tts)
 docs/video/scripts/.venv/
+
+# ZCode Sites stage
+.zcode-site/
+
+# generated publication site (rebuild: python3 publish/site/build_site.py)
+publish/site/site/

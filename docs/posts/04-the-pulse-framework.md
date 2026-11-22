@@ -9,11 +9,11 @@
 
 ```mermaid
 flowchart LR
-    P["**P**erceive<br/>probes · heartbeats<br/>traces · checksums"] --> U["**U**nderstand<br/>classify + RCA<br/>hypotheses w/ confidence"]
-    U --> L["**L**ocalize<br/>component · line<br/>config · dependency"]
-    L --> S["**S**olve<br/>restart · rollback<br/>reroute · patch"]
+    P["`**P**erceive<br/>probes · heartbeats<br/>traces · checksums`"] --> U["`**U**nderstand<br/>classify + RCA<br/>hypotheses w/ confidence`"]
+    U --> L["`**L**ocalize<br/>component · line<br/>config · dependency`"]
+    L --> S["`**S**olve<br/>restart · rollback<br/>reroute · patch`"]
     S --> G{"verification gate<br/>(non-AI oracle)"}
-    G -->|"pass"| E["**E**volve<br/>verify outcome · postmortem<br/>harden · update policy"]
+    G -->|"pass"| E["`**E**volve<br/>verify outcome · postmortem<br/>harden · update policy`"]
     G -->|"fail"| S
     E --> P
 ```

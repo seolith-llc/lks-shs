@@ -67,6 +67,15 @@ The competency bar: **every item below must reach ✓ with recorded evidence bef
 - [x] ✓ Visual acceptance: 3 rounds (viewport truncation, broken full-page stitch, then tall-viewport single frame) → **PASS**; evidence `docs/animations/pulse-interactive-evidence.png`
 - [x] ✓ Wired in: series overview "Try it live" section, README layout + phase list
 
+## Phase 10 — Publication site (`#Step010`, 2026-11-22)
+- [x] ✓ `publish/site/build_site.py` — stdlib static generator (committed; output regenerable, gitignored)
+- [x] ✓ Site built: index + 8 posts + 4 articles + interactive simulator + SVGs; mermaid via CDN w/ fallback; links absolutized/mapped
+- [x] ✓ Local verification: all routes 200; mermaid renders as SVG (browser-checked); `zcode-site check` → **live/200**
+- [x] ✓ Visual judge round 1 caught a real defect (markdown-bold inside mermaid labels) → fixed via markdown-string syntax in post 04 (also fixes GitHub rendering); other findings were capture artifacts (viewport-cap truncation)
+- [ ] ◐ Visual judge round 2 (fixed diagram) — verdict pending, gates deploy
+- [ ] ☐ **Deploy to public ZCode Sites URL — awaiting explicit user confirmation** (stage ready in `.zcode-site/stage/`)
+- [ ] ☐ dev.to mirror — awaiting API key (automation → unlisted drafts) or manual import of `publish/articles/devto/`
+
 ## Continuous
 - [x] ✓ Prompt history every turn + INDEX current (protocol: `docs/prompt-histories/README.md`)
 - [x] ✓ Git milestone commits
